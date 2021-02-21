@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    {% load crispy_forms_tags %}
+
+
+    <div id="module_home">
+
+    <div class="padding">
+
+        <div class="module-text">
+            <div class="container-fluid" id="underlay">
+                <h1>Team2-Teststand</h1>
+                <h3>Velkommen til team2-modulet...</h3>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="column">
+        <div class="container-fluid" id="underlay">
+            <div class="module-text">
+                <h3>Data til teststand:</h3>
+                <div class="padding">
+                    {% crispy output %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="padding">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+
+                <div class="container underlay">
+
+                    <h3>Data fra teststand:</h3>
+
+
+                    <div class="module-text">
+                        <table class="table table-dark">
+                            <tr>
+                                <th>Spænding</th>
+                                <th>Strøm</th>
+                                <th>Effekt</th>
+                                <th>modstand</th>
+                                <th>Irradians</th>
+                            </tr>
+                            <tr>
+                                <td>0 V</td>
+                                <td>0 A</td>
+                                <td>0 W</td>
+                                <td>0 Ohm</td>
+                                <td>0 W/m²</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="module-text">
+            <form action="#" method="get">
+                <input type="submit" class="btn btn-primary" value="Opdatér" name="updateBtn">
+            </form>
+        </div>
+    </div>
+    <!-- managed via the css file -->
+
+{% endblock content %}
+
