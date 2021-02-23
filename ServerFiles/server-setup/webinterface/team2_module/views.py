@@ -35,46 +35,6 @@ import io
 import json
 
 
-def gui_demo(request):
-    """
-    This view generates contents for a demo page, to show GUI possibilities.
-    It is semi-functional, meant to be a cut & paste template for implementors.
-    Janus, Feb-March 2020.
-    """
-
-    # Denne formular bliver vist på siden
-    form = AccelerometerForm()
-
-    # Denne data bliver visualiseret på siden
-    N = 10000  # Num samples
-    fs = 16000  # Sampling freq
-    Ts = 1 / fs  # Sampling time
-    A = 5  # Amplitude
-    f0 = 4000  # Hz
-
-    t = np.linspace(0, N * Ts, N)
-    n = np.arange(0, N)
-    x = 1.2 * A * np.sin(2 * np.pi * f0 / fs * n) + A * np.sin(2 * np.pi * 0.75 * f0 / fs * n) + 0.4 * A * np.sin(
-        2 * np.pi * 1.33 * f0 / fs * n)
-
-    X = np.fft.fftshift(20 * np.log10(np.abs(fft.fft(x, N))))
-    f = np.fft.fftshift(fft.fftfreq(N, d=Ts))
-
-    plot = figure(title='FFT powerspektrum 😍',
-                  sizing_mode='scale_width',
-                  x_axis_label='f [Hz]', y_axis_label='|X(f)|^2 [dB]',
-                  x_range=[0, fs / 2],
-                  plot_width=800, toolbar_location="below")
-
-    plot.add_tools(HoverTool())
-    plot.line(f, X, legend_label='Powerspektrum for x(t)', color='blue')
-
-    # Her bliver figuren lavet til hhv. JavaScript og indhold til et HTML-div
-    script, div = components(plot)
-
-    # Her bliver siden kaldt og variablerne  script, div og form bliver leveret med...
-    return render(request, 'demo_module/gui-demo.html', {'script': script, 'div': div, 'form': form})
-
 
 # Show landing page for the demo module
 def demo_main_page(request):
@@ -191,7 +151,9 @@ def transmit_mqtt(form_obj):
     m = protocol.Message()
     m.new()
     m.sentBy = form_obj['sender']
-
+    m.angle = form_obj['angle']
+    m.brightness = form_obj['brightness']
+    m.resistance = form_obj['resistance']
     # try-except on the json conversions
     # convert json -> python
     # Done inserting data
@@ -199,7 +161,9 @@ def transmit_mqtt(form_obj):
     send_me = protocol.ProtocolSchema.write_jsonstr(m.payload)
 
     # debug output to console
+    print("før!!")
     print(send_me)
+    print("Efter!!")
 
     # Send it
 
@@ -501,52 +465,6 @@ def make_excel_from_db(request, test_id):
     return response
 
 
-# def send_mqtt(request):
-#
-#     # Create a message to send
-#     topic = "demo_module/inbound"
-#
-#     # Payload
-#     m = protocol.Message()
-#     m.new()
-#     m.sentBy = "Team 2"
-#     m.msgType = "data"
-#     m.statusCode = "200"
-#     m.dataObj = {
-#         'x': [1,2,3,4,5,6,7,8,9,10],
-#         'y': [1,4,9,16,25,36,49,64,81,100]
-#     }
-#
-#     # Get ready to send
-#     m.pack()
-#     send_me = protocol.ProtocolSchema.write_jsonstr(m.payload)
-#
-#     # The donothing function
-#     def donothing(client, userdata, message):
-#         pass
-#
-#     # Create client
-#     publisher = MqttClient("MessageSender", donothing)
-#
-#     # Send and disconnect
-#     rc = publisher.publish(topic, send_me)
-#     publisher.disconnect()
-#
-#     # Render a response
-#     template = loader.get_template('demo_module/message_sent.html')
-#
-#     if rc:
-#         outcome = "Success. Message was sent."
-#     else:
-#         outcome = "Failure. Message was not sent."
-#
-#     context = {'outcome': outcome,
-#                'topic': topic,
-#                'msg': send_me}
-#
-#     return HttpResponse(template.render(context, request))
-
-
 def team2_main_page(request):
     if request.method == 'POST':
         output = PanelAngleForm(request.POST)
@@ -580,6 +498,3 @@ def team2_main_page(request):
     else:
         output = PanelAngleForm()
         return render(request, 'team2_module/home.html', {'output': output})
-
-# def panel_angel(request):
-#   return render(request, 'team2_module/panel_angel_form.html')
