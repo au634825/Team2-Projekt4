@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="dfc427a1-1e2d-4b26-83b6-9a077bc3c03f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../runServerSetup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../runServerSetup.sh" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JupyterTrust" id="5f878445-cbca-44aa-af40-d2e59aef5a4a" />
+  <component name="ProjectId" id="1k9B6dURFnDg3GEgFf4o3PdHAM0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="webinterface" type="Python.DjangoServer" factoryName="Django server">
+      <module name="webinterface" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dfc427a1-1e2d-4b26-83b6-9a077bc3c03f" name="Default Changelist" comment="" />
+      <created>1605102753812</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605102753812</updated>
+      <workItem from="1605102792044" duration="872000" />
+      <workItem from="1605168633962" duration="534000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="502" y="245" width="424" height="501" key="FileChooserDialogImpl" timestamp="1605169183261">
+      <screen x="0" y="27" width="1500" height="973" />
+    </state>
+    <state x="502" y="245" width="424" height="501" key="FileChooserDialogImpl/0.27.1500.973@0.27.1500.973" timestamp="1605169183261" />
+    <state x="212" y="124" width="1016" height="747" key="SettingsEditor" timestamp="1605168950939">
+      <screen x="0" y="27" width="1500" height="973" />
+    </state>
+    <state x="212" y="124" width="1016" height="747" key="SettingsEditor/0.27.1500.973@0.27.1500.973" timestamp="1605168950939" />
+    <state x="445" y="80" width="912" height="846" key="find.popup" timestamp="1605103683394">
+      <screen x="0" y="27" width="1500" height="973" />
+    </state>
+    <state x="445" y="80" width="912" height="846" key="find.popup/0.27.1500.973@0.27.1500.973" timestamp="1605103683394" />
+  </component>
+</project>
