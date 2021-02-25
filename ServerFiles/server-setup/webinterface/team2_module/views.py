@@ -2,6 +2,7 @@
 Contains view functions for the demo_module
 URL paths that lead here are in demo_module/urls.py
 """
+import time
 
 from django.shortcuts import render, render_to_response, redirect
 from django.http import HttpResponse, HttpResponseRedirect
@@ -33,7 +34,6 @@ import csv
 import io
 
 import json
-
 
 
 # Show landing page for the demo module
@@ -133,6 +133,50 @@ def demo_create_test(request):
 def on_publish_callback(client, userdata, mid):
     global sending
     sending = False
+
+
+def receive_mqtt():
+    returnData = ""
+    # The donothing callback function
+    def on_message(client, userdata, message):
+        print(message.topic + " " + str(message.payload))
+
+        global receiving
+        receiving = False
+        pass
+
+    # Callback on publishing - After handshakes
+    def on_publish_callback(client, userdata, mid):
+        global sending
+        sending = False
+
+    # Create client
+    receiver = MqttClient("Team2ModuleMessageSender", on_message, on_publish_callback)
+    # Send and disconnect
+    topic = "Testdevice/team2_module/REQUEST"
+    send_me = "SEND_DATA"
+    rc = receiver.publish(topic, send_me)
+    receiver.subscribe("Testdevice/team2_module/DATA")
+
+    receiver.loop_start()
+    global sending
+    sending = True
+    # Wait for the handshaking to end
+    while sending:
+        pass
+
+    global receiving
+    receiving = True
+    # Wait for the handshaking to end
+    while receiving:
+        time.sleep(0.1)
+        pass
+
+    receiver.loop_stop()
+    receiver.disconnect()
+    print('hello')
+
+    return rc
 
 
 def transmit_mqtt(form_obj):
@@ -472,29 +516,48 @@ def team2_main_page(request):
         # Attempt to transmit MQTT-message based on validated output data
         print(output.is_valid())
         if output.is_valid():
-            #locale.setlocale(locale.LC_TIME, 'da_DK.utf8')
-            #temp = ND_TS()
-            #timestamp = datetime.now()
-            #temp.TimeStamp = timestamp.strftime("%d/%m/%Y-%H:%M:%S")
-            #temp.ID = 0
+            # locale.setlocale(locale.LC_TIME, 'da_DK.utf8')
+            # temp = ND_TS()
+            # timestamp = datetime.now()
+            # temp.TimeStamp = timestamp.strftime("%d/%m/%Y-%H:%M:%S")
+            # temp.ID = 0
             # save no delete field
-            #temp.NoDelete = output.cleaned_data.get("no_delete")
-            #temp.save()
+            # temp.NoDelete = output.cleaned_data.get("no_delete")
+            # temp.save()
 
             if transmit_mqtt(output.cleaned_data):
                 print("!!!!!Succes. Beskeden blev sendt. med mqtt")
                 outcome = "Succes. Beskeden blev sendt."
                 # Set "test stand" as not available
-                #temp = ND_TS.objects.all()[0]
-                #temp.Statusbool = False
-                #temp.save()
+                # temp = ND_TS.objects.all()[0]
+                # temp.Statusbool = False
+                # temp.save()
             else:
                 outcome = "Fejl. Beskeden blev ikke."
         return render(request, 'team2_module/home.html', {'output': output})
     elif request.GET.get('updateBtn'):
         print("UpdateBtn pressed")
+        if receive_mqtt():
+            print('beaglebone modtog data request')
+        else:
+            print('beaglebone modtog IKKE data request :(')
+
+        voltage = 10
+        current = 34
+        power = 10 * 34
+        resistance = round(voltage / current, 2)
+        irradiance = 0.3
+
         output = PanelAngleForm()
-        return render(request, 'team2_module/home.html', {'output': output})
+        context = {'output': output,
+                   'voltage': voltage,
+                   'current': current,
+                   'power': power,
+                   'resistance': resistance,
+                   'irradiance': irradiance
+                   }
+
+        return render(request, 'team2_module/home.html', context)
     else:
         output = PanelAngleForm()
         return render(request, 'team2_module/home.html', {'output': output})
