@@ -134,12 +134,14 @@ def on_publish_callback(client, userdata, mid):
     global sending
     sending = False
 
-
 def receive_mqtt():
-    returnData = ""
     # The donothing callback function
+
     def on_message(client, userdata, message):
         print(message.topic + " " + str(message.payload))
+        global returnData
+        returnData = eval(message.payload.decode("utf-8"))
+
 
         global receiving
         receiving = False
@@ -176,7 +178,7 @@ def receive_mqtt():
     receiver.disconnect()
     print('hello')
 
-    return rc
+    return rc, returnData
 
 
 def transmit_mqtt(form_obj):
@@ -537,16 +539,25 @@ def team2_main_page(request):
         return render(request, 'team2_module/home.html', {'output': output})
     elif request.GET.get('updateBtn'):
         print("UpdateBtn pressed")
-        if receive_mqtt():
+        voltage = 1
+        current = 1
+        power = voltage * current
+        resistance = round(voltage / current, 2)
+        irradiance = 1
+        temperature = 1
+
+        receiveStatus, returnData = receive_mqtt()
+        if receiveStatus:
             print('beaglebone modtog data request')
+            voltage = returnData[0]
+            current = returnData[1]
+            power = returnData[2]
+            resistance = returnData[3]
+            irradiance = returnData[4]
+            temperature = returnData[5]
         else:
             print('beaglebone modtog IKKE data request :(')
 
-        voltage = 10
-        current = 34
-        power = 10 * 34
-        resistance = round(voltage / current, 2)
-        irradiance = 0.3
 
         output = PanelAngleForm()
         context = {'output': output,
@@ -554,7 +565,8 @@ def team2_main_page(request):
                    'current': current,
                    'power': power,
                    'resistance': resistance,
-                   'irradiance': irradiance
+                   'irradiance': irradiance,
+                   'temperature': temperature,
                    }
 
         return render(request, 'team2_module/home.html', context)
