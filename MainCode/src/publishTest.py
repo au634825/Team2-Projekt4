@@ -34,5 +34,5 @@ global Connected
 Connected = False
 while not Connected:  # Wait for connection
     time.sleep(0.1)
-ret = client.publish("Testdevice/team2_module/SECRET", "publishing")
+ret = client.publish("Testdevice/team2_module/panelangle", "publishing")
 time.sleep(3)

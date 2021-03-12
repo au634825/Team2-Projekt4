@@ -15,6 +15,7 @@ from crispy_forms.layout import Layout, Submit, Row, Column
 
 from .models import Status
 
+
 class TestForm(forms.Form):
     #         "protocolVersion": {"type": "number"},
     #         "sentBy": {"type": "string"},
@@ -29,8 +30,8 @@ class TestForm(forms.Form):
     )
 
     TOPICS = (
-        ('Testdevice/demo_module/Inbound','Testdevice/demo_module/Inbound'),
-        ('Testdevice/demo_module/Outbound','Testdevice/demo_module/Outbound'),
+        ('Testdevice/demo_module/Inbound', 'Testdevice/demo_module/Inbound'),
+        ('Testdevice/demo_module/Outbound', 'Testdevice/demo_module/Outbound'),
     )
 
     MSG_TYPES = (
@@ -128,7 +129,6 @@ class TestForm(forms.Form):
         )
 
 
-
 class AccelerometerForm(forms.Form):
     """
     Denne klasse implementerer formularen til GUI-demo, som vises på Webinterface
@@ -189,7 +189,6 @@ class AccelerometerForm(forms.Form):
         label='Frekvens [Hz]',
         choices=FREQ_LIST
     )
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -265,7 +264,6 @@ class AccelerometerForm(forms.Form):
         label='Frekvens [Hz]',
         choices=FREQ_LIST
     )
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -291,11 +289,11 @@ class PanelAngleForm(forms.Form):
         ('75', '75 Deg'),
         ('90', '90 Deg')
     )
-    TOPICS = (
-        # topic = (')
-        ('Testdevice/team2_module/panelangle','Testdevice/team2_module/panelangle'),
-    )
-    LIGHT_LIST =(
+    # TOPICS = (
+    #   # topic = (')
+    #   ('Testdevice/team2_module/panelangle','Testdevice/team2_module/panelangle'),
+    # )
+    LIGHT_LIST = (
         ('0', '0 %'),
         ('25', '25 %'),
         ('50', '50 %'),
@@ -303,10 +301,10 @@ class PanelAngleForm(forms.Form):
         ('100', '100 %'),
     )
     # mqtt message form
-    topic = forms.ChoiceField(
-        label='Emne (mqtt)',
-        choices=TOPICS,
-    )
+    # topic = forms.ChoiceField(
+    #    label='Emne (mqtt)',
+    #    choices=TOPICS,
+    # )
     # Who requested this data
     sender = forms.CharField(
         label='Opretter (navn)',
@@ -329,7 +327,6 @@ class PanelAngleForm(forms.Form):
             'loadValue': 'Heltal'})
     )
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -338,6 +335,6 @@ class PanelAngleForm(forms.Form):
             'angle',
             'brightness',
             'resistance',
-            'topic',
+            # 'topic',
             Submit('submit', 'vælg')
         )
