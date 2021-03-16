@@ -1,0 +1,13 @@
+{
+  "pipes": {
+    "brightness": "/tmp/brightness",
+    "panelangel": "/tmp/panelangel",
+    "resistance": "/tmp/resistance"
+  },
+  "defaultValues": {
+    "brightness": "0",
+    "panelangel": "90",
+    "resistance": "0"
+  }
+}
+

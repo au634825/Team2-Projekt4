@@ -38,7 +38,7 @@ def ipcRead(ipc_fifo_name):
             poll.register(fifo, select.POLLIN)
             try:
                 # Check if there's data to read. Timeout after 10 sec.
-                if (fifo, select.POLLIN) in poll.poll(10000):
+                if (fifo, select.POLLIN) in poll.poll(100000):
                     # Do something with the message
                     msg = get_message(fifo)
                     print(msg)
@@ -51,8 +51,9 @@ def ipcRead(ipc_fifo_name):
             os.close(fifo)
     finally:
         # Delete the named pipe when the reader terminates
-        os.remove(ipc_fifo_name)
+        # os.remove(ipc_fifo_name)
+        print("not removing")
 
 
-makefifo("hello_ipc")
-ipcRead("hello_ipc")
+#makefifo("/tmp/hello_ipc")
+#ipcRead("/tmp/hello_ipc")
