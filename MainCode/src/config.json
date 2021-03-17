@@ -2,7 +2,12 @@
   "pipes": {
     "brightness": "/tmp/brightness",
     "panelangel": "/tmp/panelangel",
-    "resistance": "/tmp/resistance"
+    "resistance": "/tmp/resistance",
+    "temperature": "/tmp/temperature",
+    "irradiance": "/tmp/irradiance",
+    "voltage": "/tmp/voltage",
+    "current": "/tmp/current",
+    "power": "/tmp/power"
   },
   "defaultValues": {
     "brightness": "0",

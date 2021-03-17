@@ -1,6 +1,11 @@
+import json
 import time
 from random import randrange
 import paho.mqtt.client as mqtt
+import IPCHandler as IPC
+
+with open("config.json") as json_data_file:
+    config = json.load(json_data_file)
 
 
 def on_connect(client, userdata, flags, rc):
@@ -19,23 +24,38 @@ def on_publish(client, userdata, result):  # create function for callback
 def on_message(client2, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
     if msg.payload == b'SEND_DATA':
-        voltage = 1 + randrange(10)
-        current = 1 + randrange(10)
-        power = round(voltage * current, 2)
-        # Final power from sensor register
-        resistance = round(voltage / current, 2)
-        irradiance = randrange(1)
-        temperature = randrange(100)
-
-        context = [voltage,
-                   current,
-                   power,
-                   resistance,
-                   irradiance,
-                   temperature]
+        context = getSensorValues()
 
         print('sending', context)
         client2.publish("Testdevice/team2_module/DATA", str(context))
+
+
+def getSensorValues():
+    IPC.ipcSend(config['pipes']['irradiance'], "GET")
+    irradiance = IPC.ipcRead(config['pipes']['irradiance'])
+
+    IPC.ipcSend(config['pipes']['voltage'], "GET")
+    voltage = IPC.ipcRead(config['pipes']['voltage'])
+
+    IPC.ipcSend(config['pipes']['current'], "GET")
+    current = IPC.ipcRead(config['pipes']['current'])
+
+    IPC.ipcSend(config['pipes']['power'], "GET")
+    power = IPC.ipcRead(config['pipes']['power'])
+
+    IPC.ipcSend(config['pipes']['temperature'], "GET")
+    temperature = IPC.ipcRead(config['pipes']['temperature'])
+
+    IPC.ipcSend(config['pipes']['resistance'], "GET")
+    resistance = IPC.ipcRead(config['pipes']['resistance'])
+
+    context = [voltage,
+               current,
+               power,
+               resistance,
+               irradiance,
+               temperature]
+    return context
 
 
 client = mqtt.Client()
@@ -43,7 +63,6 @@ client.on_connect = on_connect
 client.on_message = on_message
 client.on_publish = on_publish
 client.username_pw_set(username="team2", password="team2")
-
 
 client.connect("localhost", 8000, 60)
 try:
@@ -55,6 +74,3 @@ except KeyboardInterrupt:
     client.disconnect()
     client.loop_stop()
 
-
-def getvoltage():
-    print("hello")

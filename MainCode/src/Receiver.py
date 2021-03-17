@@ -1,7 +1,6 @@
 from random import randrange
 import paho.mqtt.client as mqtt
-import IPCWriter
-import IPCReader
+import IPCHandler as IPC
 import json
 
 with open("config.json") as json_data_file:
@@ -10,9 +9,15 @@ with open("config.json") as json_data_file:
 
 def initIPC():
     try:
-        IPCReader.makefifo(config['pipes']['panelangel'])
-        IPCReader.makefifo(config['pipes']['brightness'])
-        IPCReader.makefifo(config['pipes']['resistance'])
+        IPC.makefifo(config['pipes']['panelangel'])
+        IPC.makefifo(config['pipes']['brightness'])
+        IPC.makefifo(config['pipes']['resistance'])
+
+        IPC.makefifo(config['pipes']['voltage'])
+        IPC.makefifo(config['pipes']['current'])
+        IPC.makefifo(config['pipes']['power'])
+        IPC.makefifo(config['pipes']['irradiance'])
+        IPC.makefifo(config['pipes']['temperature'])
     except FileExistsError:
         print("Files already exists.")
     setDefaultValues()
@@ -20,11 +25,11 @@ def initIPC():
 
 
 def setDefaultValues():
-    IPCWriter.ipcSend(config['pipes']['panelangel'],
+    IPC.ipcSend(config['pipes']['panelangel'],
                       config['defaultValues']['panelangel'])
-    IPCWriter.ipcSend(config['pipes']['brightness'],
+    IPC.ipcSend(config['pipes']['brightness'],
                       config['defaultValues']['brightness'])
-    IPCWriter.ipcSend(config['pipes']['resistance'],
+    IPC.ipcSend(config['pipes']['resistance'],
                       config['defaultValues']['resistance'])
 
 
