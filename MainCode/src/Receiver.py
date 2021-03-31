@@ -1,20 +1,36 @@
 from random import randrange
 import paho.mqtt.client as mqtt
-import IPCWriter
-import IPCReader
+import IPCHandler as IPC
+import json
+
+with open("config.json") as json_data_file:
+    config = json.load(json_data_file)
 
 
-def init():
-    IPCReader.makefifo("panelAngle")
-    IPCReader.makefifo("brightness")
-    IPCReader.makefifo("resistance")
+def initIPC():
+    try:
+        IPC.makefifo(config['pipes']['panelangel'])
+        IPC.makefifo(config['pipes']['brightness'])
+        IPC.makefifo(config['pipes']['resistance'])
+
+        IPC.makefifo(config['pipes']['voltage'])
+        IPC.makefifo(config['pipes']['current'])
+        IPC.makefifo(config['pipes']['power'])
+        IPC.makefifo(config['pipes']['irradiance'])
+        IPC.makefifo(config['pipes']['temperature'])
+    except FileExistsError:
+        print("Files already exists.")
     setDefaultValues()
+    pass
 
 
 def setDefaultValues():
-    IPCWriter.ipcSend("panel", "90")
-    IPCWriter.ipcSend("brightness", "0")
-    IPCWriter.ipcSend("resistance", "0")
+    IPC.ipcSend(config['pipes']['panelangel'],
+                      config['defaultValues']['panelangel'])
+    IPC.ipcSend(config['pipes']['brightness'],
+                      config['defaultValues']['brightness'])
+    IPC.ipcSend(config['pipes']['resistance'],
+                      config['defaultValues']['resistance'])
 
 
 def decoder():
@@ -38,15 +54,14 @@ def on_message(client2, userdata, msg):
     print(type(msg.payload))
 
 
-
-
+initIPC()
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 # client.on_publish = on_publish
 client.username_pw_set(username="team2", password="team2")
 client.connect("localhost", 8000, 60)
-
+client.connect("localhost", 8000, 60)
 try:
     client.loop_forever()
 except KeyboardInterrupt:
