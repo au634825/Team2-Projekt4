@@ -3,61 +3,86 @@
 #include <unistd.h>
 #include "pin_data.h"
 
-int state = 0;
+int nul_procent = 0;
+int femogtyve_procent = 177500;
+int halvtreds_procent = 287500;
+int femoghalvfjers_procent = 390000;
+int ethundrede_procent = 500000;
 
-void button(){
-    value();                   //tjek for knaptryk |
-    if (value_int == 1){       //knap = HIGH       |
-        usleep(70000);         //vent 70ms         |--- Debouncing af knap
-        value();               //tjek for knaptryk |
-        if (value_int == 1){   //knap = HIGH       |
-            usleep(70000);     //vent 70ms         |
-            state=(state+1);   //ved knaptryk incrementeres state med 1
-            printf( "state nr: %d \n",state); 
-        }
-    }
-} 
+/* backup:
+int femogtyve_procent = 389706;
+int halvtreds_procent = 426471;
+int femoghalvfjers_procent = 463235;
+int ethundrede_procent = 500000;
+*/
 
 
 int main(){ 
-    pin_115_setup(); //knap
     pwm_rgled_setup();
     pwm_rled_period(500000);
     pwm_rled_duty(0);
     pwm_rled_enable(1); //rød led
     
+    
     while(1){
-        button();
+        
+        int input; 
+   //    printf("Tast '1' for COB LED 1 (kold)\n");
+    //   printf("Tast '2' for COB LED 2 (varm)\n");
+       printf("Giv input [0, 25, 50, 75, 100]:");
+  
+       scanf("%d", &input);
+
+
+        // COB LED 1
+        if (input == 1){
+            //kode til at enable relæ
+            printf("\n>> COB LED '1' er nu valgt!\n");
+        }
+
+        // COB LED 2
+        if (input == 2){
+            //kode til at enable relæ
+            printf("\n>> COB LED '2' er nu valgt!\n");
+        }
+
+
+        // 0%
+        if (input == 0){
+            pwm_rled_duty(nul_procent);
+            printf(">> indtastet er: %d duty bliver: %d\n\n"
+                               ,input, nul_procent);
+        }
 
         // 25%
-        if (state == 1 ){
-            pwm_rled_duty(389706); //skal tweakes se beregninger timebox 6
-            button();
+        if (input == 25 ){
+            pwm_rled_duty(femogtyve_procent); //skal tweakes se beregninger timebox 6
+            printf(">> indtastet er: %d duty bliver: %d\n\n"
+                         ,input, femogtyve_procent);
         }   
         
         // 50%
-        if (state == 2 ){
-            pwm_rled_duty(426471); //skal tweakes se beregninger timebox 6
-            button();
+        if (input == 50 ){
+            pwm_rled_duty(halvtreds_procent); //skal tweakes se beregninger timebox 6
+            printf(">> indtastet er: %d duty bliver: %d\n\n"
+                         ,input, halvtreds_procent);
         }   
         
         // 75%
-        if (state == 3 ){
-            pwm_rled_duty(463235); //skal tweakes se beregninger timebox 6
-            button();
+        if (input == 75 ){
+            pwm_rled_duty(femoghalvfjers_procent); //skal tweakes se beregninger timebox 6
+            printf(">> indtastet er: %d duty bliver: %d\n\n"
+                    ,input, femoghalvfjers_procent);
         }   
         
         // 100%
-        if (state == 4 ){
-            pwm_rled_duty(500000);
-            button();
+        if (input == 100 ){
+            pwm_rled_duty(ethundrede_procent);
+            printf(">> indtastet er: %d duty bliver: %d\n\n"
+                        ,input, ethundrede_procent);
         }   
         
-        // 0%
-        else if (state >4){
-            pwm_rled_duty(0);
-            state = 0;
-        }
+
     }
 return 0; 
 } 
