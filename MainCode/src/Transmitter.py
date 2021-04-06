@@ -25,29 +25,34 @@ def on_message(client2, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
     if msg.payload == b'SEND_DATA':
         context = getSensorValues()
-
+        # context = [1, 2, 3, 4, 5, 6]
         print('sending', context)
         client2.publish("Testdevice/team2_module/DATA", str(context))
 
 
 def getSensorValues():
+    print("Getting sensor values...")
     IPC.ipcSend(config['pipes']['irradiance'], "GET")
     irradiance = IPC.ipcRead(config['pipes']['irradiance'])
+    print(f'Got irradiance: {irradiance}')
 
     IPC.ipcSend(config['pipes']['voltage'], "GET")
     voltage = IPC.ipcRead(config['pipes']['voltage'])
-
+    print(f'Got voltage: {voltage}')
     IPC.ipcSend(config['pipes']['current'], "GET")
     current = IPC.ipcRead(config['pipes']['current'])
+    print(f'Got current: {current}')
 
     IPC.ipcSend(config['pipes']['power'], "GET")
     power = IPC.ipcRead(config['pipes']['power'])
+    print(f'Got power: {power}')
 
     IPC.ipcSend(config['pipes']['temperature'], "GET")
     temperature = IPC.ipcRead(config['pipes']['temperature'])
+    print(f'Got temperature: {temperature}')
 
-    IPC.ipcSend(config['pipes']['resistance'], "GET")
-    resistance = IPC.ipcRead(config['pipes']['resistance'])
+    print("Done reading for sensors")
+    resistance = float(voltage) / float(current)
 
     context = [voltage,
                current,
@@ -73,4 +78,3 @@ try:
 except KeyboardInterrupt:
     client.disconnect()
     client.loop_stop()
-

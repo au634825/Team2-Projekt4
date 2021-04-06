@@ -18,19 +18,23 @@ def initIPC():
         IPC.makefifo(config['pipes']['power'])
         IPC.makefifo(config['pipes']['irradiance'])
         IPC.makefifo(config['pipes']['temperature'])
+
+        setDefaultValues()
+        print("Init Done")
     except FileExistsError:
         print("Files already exists.")
-    setDefaultValues()
+        setDefaultValues()
+        print("Init Done")
     pass
 
 
 def setDefaultValues():
     IPC.ipcSend(config['pipes']['panelangel'],
-                      config['defaultValues']['panelangel'])
+                config['defaultValues']['panelangel'])
     IPC.ipcSend(config['pipes']['brightness'],
-                      config['defaultValues']['brightness'])
+                config['defaultValues']['brightness'])
     IPC.ipcSend(config['pipes']['resistance'],
-                      config['defaultValues']['resistance'])
+                config['defaultValues']['resistance'])
 
 
 def decoder():
@@ -54,7 +58,7 @@ def on_message(client2, userdata, msg):
     print(type(msg.payload))
 
 
-initIPC()
+#initIPC()
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
