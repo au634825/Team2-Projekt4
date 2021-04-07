@@ -4,7 +4,7 @@ from random import randrange
 import paho.mqtt.client as mqtt
 import IPCHandler as IPC
 
-with open("config.json") as json_data_file:
+with open("../config.json") as json_data_file:
     config = json.load(json_data_file)
 
 
@@ -24,13 +24,13 @@ def on_publish(client, userdata, result):  # create function for callback
 def on_message(client2, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
     if msg.payload == b'SEND_DATA':
-        context = dummySensorValues()
+        context = SensorValues()
         # context = [1, 2, 3, 4, 5, 6]
         print('sending', context)
         client2.publish("Testdevice/team2_module/DATA", str(context))
 
 
-def dummySensorValues():
+def SensorValues():
     print("Getting sensor values...")
     IPC.ipcSend(config['pipes']['temperatureGET'], "GET")
     temperature = IPC.ipcRead1(config['pipes']['temperatureVALUE'])
@@ -40,16 +40,13 @@ def dummySensorValues():
     irradiance = IPC.ipcRead1(config['pipes']['irradianceVALUE'])
     print("Got irradiance: " + str(irradiance))
 
-    IPC.ipcSend(config['pipes']['voltageGET'], "GET")
-    voltage = IPC.ipcRead1(config['pipes']['voltageVALUE'])
+    IPC.ipcSend(config['pipes']['multiGET'], "GET")
+    multi = IPC.ipcRead1(config['pipes']['multiVALUE'])
+    voltage = multi[1]
+    current = multi[2]
+    power = multi[3]
     print("Got voltage: " + str(voltage))
-
-    IPC.ipcSend(config['pipes']['currentGET'], "GET")
-    current = IPC.ipcRead1(config['pipes']['currentVALUE'])
     print("Got current: " + str(current))
-
-    IPC.ipcSend(config['pipes']['powerGET'], "GET")
-    power = IPC.ipcRead1(config['pipes']['powerVALUE'])
     print("Got power: " + str(power))
 
     resistance = float(voltage) / float(current)
@@ -63,7 +60,7 @@ def dummySensorValues():
     return context
 
 
-def getSensorValues():
+def getSensorValuesOr():
     print("Getting sensor values...")
     IPC.ipcSend(config['pipes']['irradiance'], "GET")
     irradiance = IPC.ipcRead(config['pipes']['irradiance'])

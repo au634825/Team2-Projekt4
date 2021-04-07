@@ -3,7 +3,7 @@ import paho.mqtt.client as mqtt
 import IPCHandler as IPC
 import json
 
-with open("config.json") as json_data_file:
+with open("../config.json") as json_data_file:
     config = json.load(json_data_file)
 
 
@@ -13,12 +13,8 @@ def initIPC():
         IPC.makefifo(config['pipes']['brightness'])
         IPC.makefifo(config['pipes']['resistance'])
 
-        IPC.makefifo(config['pipes']['voltageGET'])
-        IPC.makefifo(config['pipes']['voltageVALUE'])
-        IPC.makefifo(config['pipes']['currentGET'])
-        IPC.makefifo(config['pipes']['currentVALUE'])
-        IPC.makefifo(config['pipes']['powerGET'])
-        IPC.makefifo(config['pipes']['powerVALUE'])
+        IPC.makefifo(config['pipes']['multiGET'])
+        IPC.makefifo(config['pipes']['multiVALUE'])
         IPC.makefifo(config['pipes']['irradianceGET'])
         IPC.makefifo(config['pipes']['irradianceVALUE'])
         IPC.makefifo(config['pipes']['temperatureGET'])
@@ -28,7 +24,7 @@ def initIPC():
         print("Init Done")
     except FileExistsError:
         print("Files already exists.")
-        setDefaultValues()
+        #setDefaultValues()
         print("Init Done")
     pass
 
