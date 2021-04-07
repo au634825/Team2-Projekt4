@@ -33,7 +33,7 @@ def on_message(client2, userdata, msg):
 def dummySensorValues():
     IPC.ipcSend(config['pipes']['temperature'], "GET")
     temperature = IPC.ipcRead(config['pipes']['temperature'])
-    print(f'Got temperature: {temperature}')
+    print("Got temperature: " + str(temperature))
     context = [10,
                20,
                30,
@@ -47,22 +47,23 @@ def getSensorValues():
     print("Getting sensor values...")
     IPC.ipcSend(config['pipes']['irradiance'], "GET")
     irradiance = IPC.ipcRead(config['pipes']['irradiance'])
-    print(f'Got irradiance: {irradiance}')
+    print("Got irradiance: " + str(irradiance))
 
     IPC.ipcSend(config['pipes']['voltage'], "GET")
     voltage = IPC.ipcRead(config['pipes']['voltage'])
-    print(f'Got voltage: {voltage}')
+    print("Got voltage: " + str(voltage))
+
     IPC.ipcSend(config['pipes']['current'], "GET")
     current = IPC.ipcRead(config['pipes']['current'])
-    print(f'Got current: {current}')
+    print("Got current: " + str(current))
 
     IPC.ipcSend(config['pipes']['power'], "GET")
     power = IPC.ipcRead(config['pipes']['power'])
-    print(f'Got power: {power}')
+    print("Got power: " + str(power))
 
     IPC.ipcSend(config['pipes']['temperature'], "GET")
     temperature = IPC.ipcRead(config['pipes']['temperature'])
-    print(f'Got temperature: {temperature}')
+    print("Got temperature: " + str(temperature))
 
     print("Done reading for sensors")
     resistance = float(voltage) / float(current)
