@@ -13,7 +13,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <syslog.h>
-#include "try-catch.h"
 #include "errorHandling.h"
 
 #define MAX 10
