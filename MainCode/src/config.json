@@ -5,8 +5,8 @@
     "resistance": "/tmp/resistance",
     "temperatureGET": "/tmp/temperatureGET",
     "temperatureVALUE": "/tmp/temperatureVALUE",
-    "irradiance": "/tmp/irradianceGET",
-    "irradiance": "/tmp/irradianceVALUE",
+    "irradianceGET": "/tmp/irradianceGET",
+    "irradianceVALUE": "/tmp/irradianceVALUE",
     "voltage": "/tmp/voltage",
     "current": "/tmp/current",
     "power": "/tmp/power"
