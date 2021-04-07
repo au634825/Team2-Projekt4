@@ -17,7 +17,8 @@ def initIPC():
         IPC.makefifo(config['pipes']['voltage'])
         IPC.makefifo(config['pipes']['current'])
         IPC.makefifo(config['pipes']['power'])
-        IPC.makefifo(config['pipes']['irradiance'])
+        IPC.makefifo(config['pipes']['irradianceGET'])
+        IPC.makefifo(config['pipes']['irradianceVALUE'])
         IPC.makefifo(config['pipes']['temperatureGET'])
         IPC.makefifo(config['pipes']['temperatureVALUE'])
 

@@ -31,15 +31,19 @@ def on_message(client2, userdata, msg):
 
 
 def dummySensorValues():
+    print("Getting sensor values...")
     IPC.ipcSend(config['pipes']['temperatureGET'], "GET")
     temperature = IPC.ipcRead1(config['pipes']['temperatureVALUE'])
-    print(temperature)
+
+    IPC.ipcSend(config['pipes']['irradianceGET'], "GET")
+    irradiance = IPC.ipcRead1(config['pipes']['irradianceVALUE'])
+    print("Got irradiance: " + str(irradiance))
     print("Got temperature: " + temperature)
     context = [10,
                20,
                30,
                40,
-               50,
+               irradiance,
                temperature]
     return context
 
@@ -84,7 +88,7 @@ client.on_message = on_message
 client.on_publish = on_publish
 client.username_pw_set(username="team2", password="team2")
 
-#client.connect("localhost", 8000, 60)
+# client.connect("localhost", 8000, 60)
 client.connect("broker.emqx.io", 1883, 60)
 try:
     client.loop_forever()
