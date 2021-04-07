@@ -43,7 +43,7 @@ def ipcRead(ipc_fifo_name):
         poll.register(fifo, select.POLLIN)
         try:
             # Check if there's data to read. Timeout after 1 sec.
-            if (fifo, select.POLLIN) in poll.poll(500):
+            if (fifo, select.POLLIN) in poll.poll(1000):
                 # Do something with the message
                 msg = os.read(fifo, 15).decode("utf8")
             else:
@@ -65,7 +65,7 @@ def ipcSend(ipc_fifo_name, data):
         print("\nsend to pipe done")
     finally:
         os.close(fifo)
-        time.sleep(1)
+        time.sleep(5)
 
 # makefifo("/tmp/hello_ipc")
 # ipcSend("/tmp/hello_ipc", "fewf")
