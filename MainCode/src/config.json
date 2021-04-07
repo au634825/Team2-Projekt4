@@ -3,11 +3,16 @@
     "brightness": "/tmp/brightness",
     "panelangel": "/tmp/panelangel",
     "resistance": "/tmp/resistance",
-    "temperature": "/tmp/temperature",
-    "irradiance": "/tmp/irradiance",
-    "voltage": "/tmp/voltage",
-    "current": "/tmp/current",
-    "power": "/tmp/power"
+    "temperatureGET": "/tmp/temperatureGET",
+    "temperatureVALUE": "/tmp/temperatureVALUE",
+    "irradianceGET": "/tmp/irradianceGET",
+    "irradianceVALUE": "/tmp/irradianceVALUE",
+    "voltageGET": "/tmp/voltageGET",
+    "voltageVALUE": "/tmp/voltageVALUE",
+    "currentGET": "/tmp/currentGET",
+    "currentVALUE": "/tmp/currentVALUE",
+    "powerGET": "/tmp/powerGET",
+    "powerVALUE": "/tmp/powerVALUE"
   },
   "defaultValues": {
     "brightness": "0",
