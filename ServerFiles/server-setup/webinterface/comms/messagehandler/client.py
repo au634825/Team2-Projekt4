@@ -10,11 +10,13 @@ Uses Django's settings module, where the MQTT-settings are stored
 import paho.mqtt.client as mqtt
 from django.conf import settings
 
-class MqttClient():
 
+class MqttClient():
     # These should be gotten from the environment or, ideally, from the Django settings file
-    broker_address = settings.MQTT["internal"]["HOST"]
-    broker_port = settings.MQTT["internal"]["PORT"]
+    # broker_address = settings.MQTT["internal"]["HOST"]
+    broker_address = "broker.emqx.io"
+    # broker_port = settings.MQTT["internal"]["PORT"]
+    broker_port = 1883
     username = settings.MQTT["internal"]["USER"]
     password = settings.MQTT["internal"]["PASSWORD"]
 
@@ -38,7 +40,7 @@ class MqttClient():
     def on_publish(client, userdata, mid):
         pass
 
-    #Initialize the client, straight on create
+    # Initialize the client, straight on create
     def __init__(self, name, on_message, on_publish, will_message="Logging off"):
         """ __init__ Handles all setup and connection when object is initialized.
         @:param: name is the name of the client, as will be shown on the server (required)

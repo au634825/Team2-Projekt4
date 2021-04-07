@@ -24,32 +24,66 @@ def on_publish(client, userdata, result):  # create function for callback
 def on_message(client2, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
     if msg.payload == b'SEND_DATA':
-        context = getSensorValues()
+        context = dummySensorValues()
         # context = [1, 2, 3, 4, 5, 6]
         print('sending', context)
         client2.publish("Testdevice/team2_module/DATA", str(context))
+
+
+def dummySensorValues():
+    print("Getting sensor values...")
+    IPC.ipcSend(config['pipes']['temperatureGET'], "GET")
+    temperature = IPC.ipcRead1(config['pipes']['temperatureVALUE'])
+    print("Got temperature: " + temperature)
+
+    IPC.ipcSend(config['pipes']['irradianceGET'], "GET")
+    irradiance = IPC.ipcRead1(config['pipes']['irradianceVALUE'])
+    print("Got irradiance: " + str(irradiance))
+
+    IPC.ipcSend(config['pipes']['voltageGET'], "GET")
+    voltage = IPC.ipcRead1(config['pipes']['voltageVALUE'])
+    print("Got voltage: " + str(voltage))
+
+    IPC.ipcSend(config['pipes']['currentGET'], "GET")
+    current = IPC.ipcRead1(config['pipes']['currentVALUE'])
+    print("Got current: " + str(current))
+
+    IPC.ipcSend(config['pipes']['powerGET'], "GET")
+    power = IPC.ipcRead1(config['pipes']['powerVALUE'])
+    print("Got power: " + str(power))
+
+    resistance = float(voltage) / float(current)
+
+    context = [voltage,
+               current,
+               power,
+               resistance,
+               irradiance,
+               temperature]
+    return context
 
 
 def getSensorValues():
     print("Getting sensor values...")
     IPC.ipcSend(config['pipes']['irradiance'], "GET")
     irradiance = IPC.ipcRead(config['pipes']['irradiance'])
-    print(f'Got irradiance: {irradiance}')
+    print("Got irradiance: " + str(irradiance))
 
     IPC.ipcSend(config['pipes']['voltage'], "GET")
     voltage = IPC.ipcRead(config['pipes']['voltage'])
-    print(f'Got voltage: {voltage}')
+    print("Got voltage: " + str(voltage))
+
     IPC.ipcSend(config['pipes']['current'], "GET")
     current = IPC.ipcRead(config['pipes']['current'])
-    print(f'Got current: {current}')
+    print("Got current: " + str(current))
 
     IPC.ipcSend(config['pipes']['power'], "GET")
     power = IPC.ipcRead(config['pipes']['power'])
-    print(f'Got power: {power}')
+    print("Got power: " + str(power))
 
     IPC.ipcSend(config['pipes']['temperature'], "GET")
     temperature = IPC.ipcRead(config['pipes']['temperature'])
-    print(f'Got temperature: {temperature}')
+    print("Got temperature: " + str(temperature))
 
     print("Done reading for sensors")
     resistance = float(voltage) / float(current)
@@ -69,7 +103,8 @@ client.on_message = on_message
 client.on_publish = on_publish
 client.username_pw_set(username="team2", password="team2")
 
-client.connect("localhost", 8000, 60)
+# client.connect("localhost", 8000, 60)
+client.connect("broker.emqx.io", 1883, 60)
 try:
     client.loop_forever()
     Connected = False

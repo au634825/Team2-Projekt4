@@ -13,13 +13,18 @@ def initIPC():
         IPC.makefifo(config['pipes']['brightness'])
         IPC.makefifo(config['pipes']['resistance'])
 
-        IPC.makefifo(config['pipes']['voltage'])
-        IPC.makefifo(config['pipes']['current'])
-        IPC.makefifo(config['pipes']['power'])
-        IPC.makefifo(config['pipes']['irradiance'])
-        IPC.makefifo(config['pipes']['temperature'])
+        IPC.makefifo(config['pipes']['voltageGET'])
+        IPC.makefifo(config['pipes']['voltageVALUE'])
+        IPC.makefifo(config['pipes']['currentGET'])
+        IPC.makefifo(config['pipes']['currentVALUE'])
+        IPC.makefifo(config['pipes']['powerGET'])
+        IPC.makefifo(config['pipes']['powerVALUE'])
+        IPC.makefifo(config['pipes']['irradianceGET'])
+        IPC.makefifo(config['pipes']['irradianceVALUE'])
+        IPC.makefifo(config['pipes']['temperatureGET'])
+        IPC.makefifo(config['pipes']['temperatureVALUE'])
 
-        setDefaultValues()
+        #setDefaultValues()
         print("Init Done")
     except FileExistsError:
         print("Files already exists.")
@@ -58,14 +63,14 @@ def on_message(client2, userdata, msg):
     print(type(msg.payload))
 
 
-#initIPC()
+initIPC()
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 # client.on_publish = on_publish
 client.username_pw_set(username="team2", password="team2")
-client.connect("localhost", 8000, 60)
-client.connect("localhost", 8000, 60)
+#client.connect("localhost", 8000, 60)
+client.connect("broker.emqx.io", 1883, 60)
 try:
     client.loop_forever()
 except KeyboardInterrupt:
