@@ -17,16 +17,22 @@
 
 //extern float sensorValue;
 
-int pipeListener(char *path, float (*function)(), char *sensorType, float minThreshold, float maxThreshold) {
+int pipeListener(char *path, float (*function)(), char *sensorType,
+		float minThreshold, float maxThreshold) {
 	// Sensor function send through errorHandler
 	float sensorValue = errorHandler(function(), minThreshold, maxThreshold);
 	int fd;
 
 	char strGet[80], strSend[80];
+	char pathGet[80], pathValue[80];
+	strcat(pathGet, path);
+	strcat(pathGet, "GET");
+	strcat(pathValue, path);
+	strcat(pathValue, "VALUE");
 	while (1) {
 		memset(strGet, 0, sizeof strGet);
 		// First open in read only and read
-		fd = open(path, O_RDONLY);
+		fd = open(pathGet, O_RDONLY);
 		read(fd, strGet, 80);
 
 		// If "GET"
@@ -34,10 +40,11 @@ int pipeListener(char *path, float (*function)(), char *sensorType, float minThr
 			close(fd);
 			// Now open in write mode and write
 			// string taken from transmitter.
-			fd = open(path, O_WRONLY);
+			fd = open(pathValue, O_WRONLY);
 			gcvt(sensorValue, 5, strSend);
 			write(fd, strSend, strlen(strSend) + 1);
 			close(fd);
+			sleep(2);
 		} else {
 			// If not "GET" error message
 			syslog(LOG_NOTICE, "Wrong request message for %s pipe", sensorType);
@@ -46,7 +53,6 @@ int pipeListener(char *path, float (*function)(), char *sensorType, float minThr
 	}
 	return 0;
 }
-
 
 //int pipeListener(char *path, float (*function)(), char *sensorType,
 //		float minThreshold, float maxThreshold) {
