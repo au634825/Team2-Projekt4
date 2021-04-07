@@ -59,7 +59,7 @@ def ipcRead(ipc_fifo_name):
 def ipcSend(ipc_fifo_name, data):
     fifo = os.open(ipc_fifo_name, os.O_WRONLY)
     try:
-        msg = f"{data}".encode("UTF-8")
+        msg = str(data).encode("utf-8")
         os.write(fifo, msg)
     except KeyboardInterrupt:
         print("\nsend to pipe done")
@@ -67,6 +67,6 @@ def ipcSend(ipc_fifo_name, data):
         os.close(fifo)
         time.sleep(1)
 
-
 # makefifo("/tmp/hello_ipc")
+# ipcSend("/tmp/hello_ipc", "fewf")
 # print(ipcRead("/tmp/hello_ipc"))
