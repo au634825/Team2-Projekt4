@@ -24,10 +24,23 @@ def on_publish(client, userdata, result):  # create function for callback
 def on_message(client2, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
     if msg.payload == b'SEND_DATA':
-        context = getSensorValues()
+        context = dummySensorValues()
         # context = [1, 2, 3, 4, 5, 6]
         print('sending', context)
         client2.publish("Testdevice/team2_module/DATA", str(context))
+
+
+def dummySensorValues():
+    IPC.ipcSend(config['pipes']['temperature'], "GET")
+    temperature = IPC.ipcRead(config['pipes']['temperature'])
+    print(f'Got temperature: {temperature}')
+    context = [10,
+               20,
+               30,
+               40,
+               50,
+               temperature]
+    return context
 
 
 def getSensorValues():
@@ -69,7 +82,8 @@ client.on_message = on_message
 client.on_publish = on_publish
 client.username_pw_set(username="team2", password="team2")
 
-client.connect("localhost", 8000, 60)
+#client.connect("localhost", 8000, 60)
+client.connect("broker.emqx.io", 1883, 60)
 try:
     client.loop_forever()
     Connected = False
