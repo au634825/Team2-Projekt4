@@ -1,7 +1,7 @@
 /*
  ============================================================================
  Name        : Named_Pipe.c
- Author      : Ricky Schultz
+ Author      : 
  Version     :
  Copyright   : Your copyright notice
  Description : Hello World in C, Ansi-style
@@ -17,12 +17,14 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include "NamedPipeCommunication.h"
+#include "temperature.h"
 
 float sensorValue = 30;
 
 int main()
 {
-	pipeListener("/tmp/Temp");
+	// Temperature sensor
+	pipeListener("/tmp/temperature", temperature, "Temp", 0, 85);
     return 0;
 }
 
