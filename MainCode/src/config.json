@@ -7,9 +7,12 @@
     "temperatureVALUE": "/tmp/temperatureVALUE",
     "irradianceGET": "/tmp/irradianceGET",
     "irradianceVALUE": "/tmp/irradianceVALUE",
-    "voltage": "/tmp/voltage",
-    "current": "/tmp/current",
-    "power": "/tmp/power"
+    "voltageGET": "/tmp/voltageGET",
+    "voltageVALUE": "/tmp/voltageVALUE",
+    "currentGET": "/tmp/currentGET",
+    "currentVALUE": "/tmp/currentVALUE",
+    "powerGET": "/tmp/powerGET",
+    "powerVALUE": "/tmp/powerVALUE"
   },
   "defaultValues": {
     "brightness": "0",

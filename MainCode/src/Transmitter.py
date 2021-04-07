@@ -34,15 +34,30 @@ def dummySensorValues():
     print("Getting sensor values...")
     IPC.ipcSend(config['pipes']['temperatureGET'], "GET")
     temperature = IPC.ipcRead1(config['pipes']['temperatureVALUE'])
+    print("Got temperature: " + temperature)
 
     IPC.ipcSend(config['pipes']['irradianceGET'], "GET")
     irradiance = IPC.ipcRead1(config['pipes']['irradianceVALUE'])
     print("Got irradiance: " + str(irradiance))
-    print("Got temperature: " + temperature)
-    context = [10,
-               20,
-               30,
-               40,
+
+    IPC.ipcSend(config['pipes']['voltageGET'], "GET")
+    voltage = IPC.ipcRead1(config['pipes']['voltageVALUE'])
+    print("Got voltage: " + str(voltage))
+
+    IPC.ipcSend(config['pipes']['currentGET'], "GET")
+    current = IPC.ipcRead1(config['pipes']['currentVALUE'])
+    print("Got current: " + str(current))
+
+    IPC.ipcSend(config['pipes']['powerGET'], "GET")
+    power = IPC.ipcRead1(config['pipes']['powerVALUE'])
+    print("Got power: " + str(power))
+
+    resistance = float(voltage) / float(current)
+
+    context = [voltage,
+               current,
+               power,
+               resistance,
                irradiance,
                temperature]
     return context
