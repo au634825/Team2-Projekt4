@@ -8,6 +8,6 @@
 #ifndef NAMEDPIPECOMMUNICATION_H_
 #define NAMEDPIPECOMMUNICATION_H_
 
-int pipeListener(char*);
+int pipeListener(char*, float(*)(), char*, float, float);
 
 #endif /* NAMEDPIPECOMMUNICATION_H_ */
