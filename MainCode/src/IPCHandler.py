@@ -32,7 +32,7 @@ def ipcRead1(ipc_fifo_name):
             if len(data) == 0:
                 break
             print('Read: "{0}"'.format(data))
-        return data
+            return data
 
 
 def ipcRead(ipc_fifo_name):
