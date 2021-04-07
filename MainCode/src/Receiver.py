@@ -11,13 +11,15 @@ def initIPC():
     try:
         IPC.makefifo(config['pipes']['panelangel'])
         IPC.makefifo(config['pipes']['brightness'])
-        IPC.makefifo(config['pipes']['resistance'])
+        IPC.makefifo(config['pipes']['resistanceGET'])
+        IPC.makefifo(config['pipes']['resistanceVALUE'])
 
         IPC.makefifo(config['pipes']['voltage'])
         IPC.makefifo(config['pipes']['current'])
         IPC.makefifo(config['pipes']['power'])
         IPC.makefifo(config['pipes']['irradiance'])
-        IPC.makefifo(config['pipes']['temperature'])
+        IPC.makefifo(config['pipes']['temperatureGET'])
+        IPC.makefifo(config['pipes']['temperatureVALUE'])
 
         #setDefaultValues()
         print("Init Done")
