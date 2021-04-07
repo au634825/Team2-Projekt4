@@ -32,7 +32,7 @@ def on_message(client2, userdata, msg):
 
 def dummySensorValues():
     IPC.ipcSend(config['pipes']['temperature'], "GET")
-    temperature = IPC.ipcRead(config['pipes']['temperature'])
+    temperature = IPC.ipcRead1(config['pipes']['temperature'])
     print("Got temperature: " + str(temperature))
     context = [10,
                20,
