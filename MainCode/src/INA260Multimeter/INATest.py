@@ -1,4 +1,5 @@
 import time
+import ast
 import board
 import busio
 import adafruit_ina260
@@ -10,5 +11,22 @@ while True:
     print("Current:", ina260.current)
     print("Voltage:", ina260.voltage)
     print("Power:", ina260.power)
-    time.sleep(1)
+    
+    multi = [ina260.current, ina260.voltage, ina260.power]
+    print(multi)
+    
+    multi = str(multi)
+    print(type(multi))
+    multi = eval(multi)
 
+    print(multi)
+    print(type(multi))
+    
+    voltage = multi[0]
+    current = multi[1]
+    power = multi[2]
+    print(voltage)
+    print(current)
+    print(power)
+
+    time.sleep(1)
