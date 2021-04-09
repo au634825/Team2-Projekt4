@@ -33,11 +33,11 @@ def on_message(client2, userdata, msg):
 def SensorValues():
     print("Getting sensor values...")
     IPC.ipcSend(config['pipes']['temperatureGET'], "GET")
-    temperature = IPC.ipcRead1(config['pipes']['temperatureVALUE'])
+    temperature = eval(IPC.ipcRead1(config['pipes']['temperatureVALUE']))
     print("Got temperature: " + temperature)
 
     IPC.ipcSend(config['pipes']['irradianceGET'], "GET")
-    irradiance = IPC.ipcRead1(config['pipes']['irradianceVALUE'])
+    irradiance = eval(IPC.ipcRead1(config['pipes']['irradianceVALUE']))
     print("Got irradiance: " + str(irradiance))
 
     IPC.ipcSend(config['pipes']['multiGET'], "GET")
