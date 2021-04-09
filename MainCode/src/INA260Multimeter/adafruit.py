@@ -22,5 +22,6 @@ while True:
         values = [ina260.voltage,
                   ina260.current,
                   ina260.power]
-        IPC.ipcSend(config['pipes']['multiGET'], values)
+        print(values)
+        IPC.ipcSend(config['pipes']['multiVALUE'], values)
     time.sleep(1)
