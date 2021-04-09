@@ -56,8 +56,8 @@ def SensorValues():
     context = [round(voltage, decimals),
                round(current, decimals),
                round(power, decimals),
-               resistance,
-               round(irradiance, decimals),
+               round(resistance, decimals),
+               irradiance,
                temperature]
     return context
 
