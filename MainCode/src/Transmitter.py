@@ -1,5 +1,6 @@
 import json
 import time
+import ast
 from random import randrange
 import paho.mqtt.client as mqtt
 import IPCHandler as IPC
@@ -42,6 +43,8 @@ def SensorValues():
 
     IPC.ipcSend(config['pipes']['multiGET'], "GET")
     multi = IPC.ipcRead1(config['pipes']['multiVALUE'])
+    multi = ast.literal_eval(multi)
+    multi = [n.strip() for n in multi]
     voltage = multi[1]
     current = multi[2]
     power = multi[3]
