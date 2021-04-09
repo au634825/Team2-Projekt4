@@ -65,7 +65,6 @@ def ipcSend(ipc_fifo_name, data):
         print("\nsend to pipe done")
     finally:
         os.close(fifo)
-        time.sleep(0.500)
 
 # makefifo("/tmp/hello_ipc")
 # ipcSend("/tmp/hello_ipc", "fewf")

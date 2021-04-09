@@ -43,7 +43,7 @@ def SensorValues():
     IPC.ipcSend(config['pipes']['multiGET'], "GET")
     multi = IPC.ipcRead1(config['pipes']['multiVALUE'])
     multi = eval(multi)
-    voltage = multi[0]+0.001
+    voltage = (multi[0]/+0.001)/1000
     current = multi[1]+0.001
     power = multi[2]
     print("Got voltage: " + str(voltage))
@@ -52,12 +52,13 @@ def SensorValues():
 
     resistance = float(voltage) / float(current)
 
-    context = [voltage,
-               current,
-               power,
-               resistance,
-               irradiance,
-               temperature]
+    decimals = 2
+    context = [round(voltage, decimals),
+               round(current, decimals),
+               round(power, decimals),
+               round(resistance, decimals),
+               round(irradiance, decimals),
+               round(temperature, decimals)]
     return context
 
 
