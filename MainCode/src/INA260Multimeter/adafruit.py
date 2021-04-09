@@ -3,8 +3,10 @@ import time
 import board
 import busio
 import adafruit_ina260
+import sys
 
-from MainCode.src import IPCHandler as IPC
+sys.path.append('../')
+import IPCHandler as IPC
 
 i2c = busio.I2C(board.SCL, board.SDA)
 ina260 = adafruit_ina260.INA260(i2c)
