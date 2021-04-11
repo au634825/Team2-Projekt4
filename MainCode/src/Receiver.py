@@ -1,10 +1,15 @@
+import time
 from random import randrange
 import paho.mqtt.client as mqtt
 import IPCHandler as IPC
 import json
 
+from MainCode.src import Timer
+
 with open("../config.json") as json_data_file:
     config = json.load(json_data_file)
+
+timer = Timer.Timer(20)
 
 
 def initIPC():
@@ -20,11 +25,11 @@ def initIPC():
         IPC.makefifo(config['pipes']['temperatureGET'])
         IPC.makefifo(config['pipes']['temperatureVALUE'])
 
-        #setDefaultValues()
+        # setDefaultValues()
         print("Init Done")
     except FileExistsError:
         print("Files already exists.")
-        #setDefaultValues()
+        # setDefaultValues()
         print("Init Done")
     pass
 
@@ -55,6 +60,7 @@ def on_connect(client, userdata, flags, rc):
 # The callback for when a PUBLISH message is received from the server.
 
 def on_message(client2, userdata, msg):
+    timer.startTimer()
     print(msg.topic + " " + str(msg.payload))
     print(type(msg.payload))
 
@@ -65,10 +71,18 @@ client.on_connect = on_connect
 client.on_message = on_message
 # client.on_publish = on_publish
 client.username_pw_set(username="team2", password="team2")
-#client.connect("localhost", 8000, 60)
+# client.connect("localhost", 8000, 60)
 client.connect("broker.emqx.io", 1883, 60)
 try:
-    client.loop_forever()
+    client.loop_start()
+    while True:
+        if timer.isActive():
+            if timer.isTimeElapsed():
+                timer.stopTimer()
+                setDefaultValues()
+
+        time.sleep(1)
+
 except KeyboardInterrupt:
     client.disconnect()
     client.loop_stop()
