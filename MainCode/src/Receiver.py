@@ -43,8 +43,9 @@ def setDefaultValues():
                 config['defaultValues']['resistance'])
 
 
-def decoder():
-    print("HEJ")
+def decoder(inputBytes):
+    values = eval(inputBytes)
+    return values
 
 
 def on_connect(client, userdata, flags, rc):
@@ -55,14 +56,17 @@ def on_connect(client, userdata, flags, rc):
 # def on_publish(client, userdata, result):  # create function for callback
 #    print("data published \n")
 #    pass
-
-
 # The callback for when a PUBLISH message is received from the server.
 
 def on_message(client2, userdata, msg):
     timer.startTimer()
-    print(msg.topic + " " + str(msg.payload))
+    print(str(msg.payload))
     print(type(msg.payload))
+    inputValues = decoder(msg.payload)
+    IPC.ipcSend(config['pipes']['panelangel'], inputValues[2])
+    IPC.ipcSend(config['pipes']['brightness'], inputValues[3])
+    res = [int(i) for i in inputValues.split() if i.isdigit()]
+    IPC.ipcSend(config['pipes']['resistance'], str(res[0]))
 
 
 initIPC()
