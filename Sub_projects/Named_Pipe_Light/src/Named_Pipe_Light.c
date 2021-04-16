@@ -22,7 +22,7 @@
 int main()
 {
 	// Temperature sensor
-	pipeListener("/tmp/irradiance", lightSensor, "Light", 0, 20000);
+	pipeListener("/tmp/irradiance", lightSensor, "Light Intensity", 0, 20000);
     return 0;
 }
 

@@ -24,8 +24,8 @@ int front = -1;
 void FIFO(float add_item) {
 	if (rear >= MAX - 1) {
 		//printf("Queue Overflow \n");
-		printf("Element deleted from queue is : %.2f\n", queue_array[front]);
-		printf("Add item second %.2f\n", queue_array[rear]);
+		printf("Element deleted from queue is : %.1f\n", queue_array[front]);
+		printf("Add item second %.1f\n", queue_array[rear]);
 		front = front + 1; // items delete
 		rear = rear + 1; // items add
 		queue_array[rear] = add_item;
@@ -37,7 +37,7 @@ void FIFO(float add_item) {
 		}
 		rear = rear + 1;
 		queue_array[rear] = add_item;
-		printf("Add item first %.2f\n", queue_array[rear]);
+		printf("Add item first %.1f\n", queue_array[rear]);
 	}
 }
 

@@ -1,6 +1,6 @@
 /*
  ============================================================================
- Name        : Named_Pipe.c
+ Name        : Named_Pipe_Temp.c
  Author      : 
  Version     :
  Copyright   : Your copyright notice
@@ -27,4 +27,3 @@ int main()
 	pipeListener("/tmp/temperature", temperature, "Temp", 0, 85);
     return 0;
 }
-
