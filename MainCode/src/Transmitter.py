@@ -38,7 +38,6 @@ def SensorValues():
 
     IPC.ipcSend(config['pipes']['irradianceGET'], "GET")
     irradiance = IPC.ipcRead1(config['pipes']['irradianceVALUE'])
-    irradiance = int(eval(irradiance))
     print("Got irradiance: " + str(irradiance))
 
     IPC.ipcSend(config['pipes']['multiGET'], "GET")
