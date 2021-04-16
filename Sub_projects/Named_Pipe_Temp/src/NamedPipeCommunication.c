@@ -19,8 +19,6 @@
 
 int pipeListener(char *path, float (*function)(), char *sensorType,
 		float minThreshold, float maxThreshold) {
-	// Sensor function send through errorHandler
-	float sensorValue = errorHandler(function(), minThreshold, maxThreshold);
 	int fd;
 
 	char strGet[80], strSend[80];
@@ -37,6 +35,9 @@ int pipeListener(char *path, float (*function)(), char *sensorType,
 
 		// If "GET"
 		if (strncmp("GET", strGet, 3) == 0) {
+			// Sensor function send through errorHandler
+			float sensorValue = errorHandler(function(), minThreshold, maxThreshold);
+			syslog(LOG_NOTICE, "sensorValue %0.1f \n", sensorValue);
 			close(fd);
 			// Now open in write mode and write
 			// string taken from transmitter.
@@ -44,7 +45,7 @@ int pipeListener(char *path, float (*function)(), char *sensorType,
 			gcvt(sensorValue, 5, strSend);
 			write(fd, strSend, strlen(strSend) + 1);
 			close(fd);
-			sleep(2);
+			sleep(0.5);
 		} else {
 			// If not "GET" error message
 			syslog(LOG_NOTICE, "Wrong request message for %s pipe", sensorType);

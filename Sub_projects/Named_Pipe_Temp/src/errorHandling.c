@@ -34,7 +34,7 @@ float errorHandler(float sensorValue, float minThreshold, float maxThreshold) {
 		} else {
 			numOfEq = 0;
 			FIFO(sensorValue);
-			return (sensorValue);
+			return sensorValue;
 		}
 	} else {
 		syslog(LOG_NOTICE, "Failed to get temp, Threshold exceeded"); // Write to logfile
