@@ -8,6 +8,6 @@
 #ifndef FIFO_QUEUE_H_
 #define FIFO_QUEUE_H_
 
-void FIFO(float);
+void FIFO(int);
 
 #endif /* FIFO_QUEUE_H_ */

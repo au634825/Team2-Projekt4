@@ -37,12 +37,12 @@ int pipeListener(char *path, float (*function)(), char *sensorType,
 		if (strncmp("GET", strGet, 3) == 0) {
 			// Sensor function send through errorHandler
 			float sensorValue = errorHandler(function(), minThreshold, maxThreshold);
-			syslog(LOG_NOTICE, "sensorValue %0.1f \n", sensorValue);
+			syslog(LOG_NOTICE, "sensorValue %.0f \n", sensorValue);
 			close(fd);
 			// Now open in write mode and write
 			// string taken from transmitter.
 			fd = open(pathValue, O_WRONLY);
-			gcvt(sensorValue, 5, strSend);
+			sprintf(strSend, "%.0f", sensorValue);
 			write(fd, strSend, strlen(strSend) + 1);
 			close(fd);
 			sleep(0.5);

@@ -42,7 +42,7 @@ int pipeListener(char *path, float (*function)(), char *sensorType,
 			// Now open in write mode and write
 			// string taken from transmitter.
 			fd = open(pathValue, O_WRONLY);
-			gcvt(sensorValue, 5, strSend);
+			sprintf(strSend, "%.1f", sensorValue);
 			write(fd, strSend, strlen(strSend) + 1);
 			close(fd);
 			sleep(0.5);
