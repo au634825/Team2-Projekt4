@@ -22,13 +22,13 @@ def on_disconnect(client, userdata, rc):
     print("client disconnected ok")
 
 
-client = mqtt.Client("client")
+client = mqtt.Client()
 client.on_connect = on_connect
-client.on_publish = on_publish
-client.on_disconnect = on_disconnect
+# client.on_publish = on_publish
 client.username_pw_set(username="team2", password="team2")
-
 client.connect("localhost", 8000, 60)
+print("Connecting...")
+#client.connect("broker.hivemq.com", 1883, 60)
 client.loop_start()
 global Connected
 Connected = False

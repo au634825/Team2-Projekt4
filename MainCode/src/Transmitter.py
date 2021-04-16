@@ -53,10 +53,12 @@ def SensorValues():
     resistance = float(voltage) / float(current)
 
     decimals = 1
+    decimalsnul = 0
+    
     context = [round(voltage, decimals),
-               round(current, decimals),
-               round(power, decimals),
-               round(resistance, decimals),
+               round(current, decimalsnul),
+               round(power, decimalsnul),
+               round(resistance, decimalsnul),
                irradiance,
                temperature]
     return context
