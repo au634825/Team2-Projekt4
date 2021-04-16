@@ -65,9 +65,9 @@ def on_message(client2, userdata, msg):
     inputValues = decoder(msg.payload)
     print(inputValues[4])
     # res = [int(i) for i in inputValues.split() if i.isdigit()]
-    # IPC.ipcSend(config['pipes']['panelangel'], inputValues[2])
+    IPC.ipcSend(config['pipes']['panelangel'], inputValues[2])
     # IPC.ipcSend(config['pipes']['brightness'], inputValues[3])
-    IPC.ipcSend(config['pipes']['resistance'], str(inputValues[4]))
+    # IPC.ipcSend(config['pipes']['resistance'], str(inputValues[4]))
 
 
 initIPC()

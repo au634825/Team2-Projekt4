@@ -8,7 +8,7 @@ import IPCHandler as IPC
 
 with open("../../config.json") as json_data_file:
     config = json.load(json_data_file)
-    
+
 servo_pin = "P9_21"
 
 duty_min = 8
