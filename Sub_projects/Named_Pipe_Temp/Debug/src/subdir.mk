@@ -6,7 +6,7 @@
 C_SRCS += \
 ../src/FIFO_queue.c \
 ../src/NamedPipeCommunication.c \
-../src/Named_Pipe.c \
+../src/Named_Pipe_Temp.c \
 ../src/errorHandling.c \
 ../src/temperature.c \
 ../src/try-catch.c 
@@ -14,7 +14,7 @@ C_SRCS += \
 OBJS += \
 ./src/FIFO_queue.o \
 ./src/NamedPipeCommunication.o \
-./src/Named_Pipe.o \
+./src/Named_Pipe_Temp.o \
 ./src/errorHandling.o \
 ./src/temperature.o \
 ./src/try-catch.o 
@@ -22,7 +22,7 @@ OBJS += \
 C_DEPS += \
 ./src/FIFO_queue.d \
 ./src/NamedPipeCommunication.d \
-./src/Named_Pipe.d \
+./src/Named_Pipe_Temp.d \
 ./src/errorHandling.d \
 ./src/temperature.d \
 ./src/try-catch.d 

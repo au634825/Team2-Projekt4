@@ -6,6 +6,7 @@
  */
 
 #include <stdio.h>
+#include <syslog.h>
 #include <stdlib.h>
 #include <linux/i2c-dev.h>
 #include <sys/ioctl.h>
@@ -35,7 +36,7 @@ float lightSensor() {
 		//stopper derefter eksekveringen af programmet med exit(1);
 
 		if ((file = open(bus, O_RDWR)) < 0) {
-			printf("Bus kunne ikke åbnes. \n");
+			syslog(LOG_NOTICE, "Bus kunne ikke åbnes. \n");
 			exit(1);
 		}
 
@@ -74,7 +75,7 @@ float lightSensor() {
 		read(file, data, 2);
 
 		if (read(file, data, 2) != 2) {
-			printf("Error i input/output\n");
+			syslog(LOG_NOTICE, "Error i input/output\n");
 		}
 
 		else {
@@ -83,7 +84,7 @@ float lightSensor() {
 			float calib = 3.2;
 			float messureLUX = (data[1] * 256 + data[0]) / calib;
 			//printf("The lux value is -> %.2f lux \n", messure);
-
+			//syslog(LOG_NOTICE, "sensorValue %0.1f \n", messureLUX);
 
 			//usleep(500000);
 

@@ -23,19 +23,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: Named_Pipe
+all: Named_Pipe_Temp
 
 # Tool invocations
-Named_Pipe: $(OBJS) $(USER_OBJS)
+Named_Pipe_Temp: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross GCC Linker'
-	arm-linux-gnueabihf-gcc  -o "Named_Pipe" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-linux-gnueabihf-gcc  -o "Named_Pipe_Temp" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) Named_Pipe
+	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) Named_Pipe_Temp
 	-@echo ' '
 
 .PHONY: all clean dependents
