@@ -6,17 +6,23 @@
 C_SRCS += \
 ../src/Named_Pipe_Light_intensity.c \
 ../src/lysintensitet.c \
-../src/pin_data.c 
+../src/pin_data.c \
+../src/setitimer.c \
+../src/sig_handler.c 
 
 OBJS += \
 ./src/Named_Pipe_Light_intensity.o \
 ./src/lysintensitet.o \
-./src/pin_data.o 
+./src/pin_data.o \
+./src/setitimer.o \
+./src/sig_handler.o 
 
 C_DEPS += \
 ./src/Named_Pipe_Light_intensity.d \
 ./src/lysintensitet.d \
-./src/pin_data.d 
+./src/pin_data.d \
+./src/setitimer.d \
+./src/sig_handler.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

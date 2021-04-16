@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include "lysintensitet.h"
 #include "pin_data.h"
+#include "setitimer.h"
 
 const char path[] = "/tmp/brightness";
 
@@ -26,6 +27,7 @@ int main() {
 	int fd;
 	char strGet[80];
 	char *EHand;
+	const int sec = 30;
 	pwm_mosfet_setup();
 
 	while (1) {
@@ -35,7 +37,12 @@ int main() {
 		read(fd, strGet, 80);
 		close(fd);
 		int input = (int) strtol(strGet, &EHand, 10);
+		timeInterval(sec);
+		syslog(LOG_NOTICE, "\nSetitimer starts\n");
 		lightIntensity(input);
+		syslog(LOG_NOTICE, "\nInput received: %d \n", input);
+
+
 		sleep(2);
 	}
 	return 0;
