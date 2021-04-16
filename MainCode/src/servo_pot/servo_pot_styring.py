@@ -10,7 +10,7 @@ import IPCHandler as IPC
 with open("../../config.json") as json_data_file:
     config = json.load(json_data_file)
 
-servo_pin = "P9_14"
+servo_pin = "P8_13"
 duty_min = 3
 duty_max = 15.3
 duty_span = duty_max - duty_min
@@ -24,8 +24,8 @@ buffer_const = 1  # buffer degree (tolerence)
 duty_scale_const = 94  # duty værdi på 94 svare til 100ohm
 
 while True:
-    ohminput = float(input("Indtast modstands-værdi imellem 0 og 924: "))
-    #ohminput = float(IPC.ipcRead1(config['pipes']['resistance']))
+    #ohminput = float(input("Indtast modstands-værdi imellem 0 og 924: "))
+    ohminput = float(IPC.ipcRead1(config['pipes']['resistance']))
 
     angle2 = (((ohminput - buffer_const) / (max_ohm_const / (max_deg_const - min_deg_const))) + min_deg_const)
 
