@@ -10,7 +10,7 @@ import IPCHandler as IPC
 with open("../../config.json") as json_data_file:
     config = json.load(json_data_file)
 
-servo_pin = "P9_14"
+servo_pin = "P8_13"
 duty_min = 3
 duty_max = 15.3
 duty_span = duty_max - duty_min
