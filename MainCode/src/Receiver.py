@@ -4,12 +4,12 @@ import paho.mqtt.client as mqtt
 import IPCHandler as IPC
 import json
 
-import Timer
+import Timer as safetyTimer
 
 with open("../config.json") as json_data_file:
     config = json.load(json_data_file)
 
-timer = Timer.Timer(20)
+timer = safetyTimer.Timer(600)  # 10 * 60 sec = 10 min
 
 
 def initIPC():
@@ -63,11 +63,9 @@ def on_message(client2, userdata, msg):
     print(str(msg.payload))
     print(type(msg.payload))
     inputValues = decoder(msg.payload)
-    print(inputValues[4])
-    # res = [int(i) for i in inputValues.split() if i.isdigit()]
     IPC.ipcSend(config['pipes']['panelangel'], inputValues[2])
-    # IPC.ipcSend(config['pipes']['brightness'], inputValues[3])
-    # IPC.ipcSend(config['pipes']['resistance'], str(inputValues[4]))
+    IPC.ipcSend(config['pipes']['brightness'], inputValues[3])
+    IPC.ipcSend(config['pipes']['resistance'], str(inputValues[4]))
 
 
 initIPC()
