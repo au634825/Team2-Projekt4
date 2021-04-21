@@ -36,7 +36,6 @@ import io
 import json
 
 
-
 def receive_mqtt():
     def on_message(client, userdata, message):
         print(message.topic + " " + str(message.payload))
@@ -84,26 +83,9 @@ def transmit_mqtt(form_obj):
     This function transmits a validated message.
     Jenath, feb 2021
     """
-
     # Print to console for debug
     print(form_obj)
-
     # Create a message to send
-    """
-    topic = form_obj['topic']
-    # Payload
-    m = protocol.Message()
-    m.new()
-    m.sentBy = form_obj['sender']
-    m.angle = form_obj['angle']
-    m.brightness = form_obj['brightness']
-    m.resistance = form_obj['resistance']
-    # try-except on the json conversions
-    # convert json -> python
-    # Done inserting data
-    m.pack()
-    send_me = protocol.ProtocolSchema.write_jsonstr(m.payload)
-    """
     topic = 'Testdevice/team2_module/RECEIVE'
     send_me = [topic,
                form_obj['sender'],
@@ -154,14 +136,9 @@ def team2_main_page(request):
         # Attempt to transmit MQTT-message based on validated output data
         print(output.is_valid())
         if output.is_valid():
-
             if transmit_mqtt(output.cleaned_data):
                 print("!!!!!Succes. Beskeden blev sendt. med mqtt")
                 outcome = "Succes. Beskeden blev sendt."
-                # Set "test stand" as not available
-                # temp = ND_TS.objects.all()[0]
-                # temp.Statusbool = False
-                # temp.save()
             else:
                 outcome = "Fejl. Beskeden blev ikke."
         return render(request, 'team2_module/home.html', {'output': output})
@@ -197,6 +174,7 @@ def team2_main_page(request):
                    }
 
         return render(request, 'team2_module/home.html', context)
+
     else:
         output = PanelAngleForm()
         return render(request, 'team2_module/home.html', {'output': output})
