@@ -38,6 +38,7 @@ echo "Temperature sensor started"
 sleep 1
 
 echo "Starting Light intensity controller.."
+config-pin P9_21 pwm &
 ./Sub_projects/Named_Pipe_Light_intensity/Named_Pipe_Light_intensity &
 LightIntensityPID=$!
 echo "LightIntensityPID pid: $LightIntensityPID"
