@@ -17,7 +17,7 @@
 float temperature() {
 	char buffer[5];
 	char *EHand;
-	FILE *fd = fopen("/sys/bus/iio/devices/iio:device0/in_voltage0_raw", "r");
+	FILE *fd = fopen("/sys/bus/iio/devices/iio:device0/in_voltage5_raw", "r");
 	fread(&buffer, sizeof(char), 20, fd);
 	float value = strtof(buffer, &EHand);
 	float temperature = (value * 1800 / 4096.0) / 10.0;
