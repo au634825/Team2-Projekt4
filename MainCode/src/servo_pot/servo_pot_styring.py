@@ -4,7 +4,7 @@ import time
 import sys
 import Adafruit_BBIO.PWM as PWM
 
-sys.path.append('../')
+sys.path.append('./MainCode/src/')
 import IPCHandler as IPC
 
 with open("../../config.json") as json_data_file:
