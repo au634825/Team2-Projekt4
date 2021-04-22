@@ -5,14 +5,14 @@ import busio
 import adafruit_ina260
 import sys
 
-sys.path.append('../')
+sys.path.append('./MainCode/src/')
 import IPCHandler as IPC
 
 i2c = busio.I2C(board.SCL, board.SDA)
 ina260 = adafruit_ina260.INA260(i2c)
 print("i2c detected")
 
-with open("../../config.json") as json_data_file:
+with open("./MainCode/config.json") as json_data_file:
     config = json.load(json_data_file)
 
 while True:

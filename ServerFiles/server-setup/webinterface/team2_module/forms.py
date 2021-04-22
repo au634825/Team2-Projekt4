@@ -17,14 +17,6 @@ from .models import Status
 
 
 class TestForm(forms.Form):
-    #         "protocolVersion": {"type": "number"},
-    #         "sentBy": {"type": "string"},
-    #         "msgType": {"type": "string"},
-    #         "commandList": {"type": "string"},
-    #         "statusCode": {"type": "string"},
-    #         "parameterObj": {"type": "object"},
-    #         "dataObj": {"type": "object"},
-
     PROTOCOL_VERSIONS = (
         ('1.1', 'Ver. 1.1'),
     )

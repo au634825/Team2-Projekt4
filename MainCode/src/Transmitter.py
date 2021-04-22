@@ -4,7 +4,7 @@ from random import randrange
 import paho.mqtt.client as mqtt
 import IPCHandler as IPC
 
-with open("../config.json") as json_data_file:
+with open("./MainCode/config.json") as json_data_file:
     config = json.load(json_data_file)
 
 
@@ -53,10 +53,11 @@ def SensorValues():
     resistance = float(voltage) / float(current)
 
     decimals = 1
+
     context = [round(voltage, decimals),
-               round(current, decimals),
-               round(power, decimals),
-               round(resistance, decimals),
+               int(current),
+               int(power),
+               int(resistance),
                irradiance,
                temperature]
     return context
