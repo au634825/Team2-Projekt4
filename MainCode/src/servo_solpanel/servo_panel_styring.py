@@ -6,7 +6,7 @@ import sys
 sys.path.append('./MainCode/src/')
 import IPCHandler as IPC
 
-with open("../../config.json") as json_data_file:
+with open("./MainCode/config.json") as json_data_file:
     config = json.load(json_data_file)
 
 servo_pin = "P9_21"
