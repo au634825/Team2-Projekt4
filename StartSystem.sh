@@ -45,14 +45,14 @@ echo "Light intensity controller started"
 sleep 1
 
 echo "Starting load potentiometer controller.."
-python3 ./MainCode/servo_pot/servo_pot_styring.py &
+python3 ./MainCode/src/servo_pot/servo_pot_styring.py &
 LoadPID=$!
 echo "LoadPID pid: $LoadPID"
 echo "Load potentiometer controller started"
 sleep 1
 
 echo "Starting panel angle controller.."
-python3 ./MainCode/servo_solpanel/servo_panel_styring.py &
+python3 ./MainCode/src/servo_solpanel/servo_panel_styring.py &
 PanelAnglePID=$!
 echo "PanelAnglePID pid: $PanelAnglePID"
 echo "panel angle controller started"
