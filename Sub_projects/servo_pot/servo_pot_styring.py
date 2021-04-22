@@ -2,7 +2,7 @@
 import time
 import Adafruit_BBIO.PWM as PWM
  
-servo_pin = "P2_3"
+servo_pin = "P8_13"
 duty_min = 3
 duty_max = 15.3
 duty_span = duty_max - duty_min
@@ -23,11 +23,11 @@ while True:
     #angle3=max_ohm_const/270
     #print("vinkel (debug) %",angle3)
     
-    if (angle<70):#til små modstandsværdier under 70ohm
+    if (ohminput<70):#til små modstandsværdier under 70ohm
         PWM.set_duty_cycle(servo_pin, duty_scale_const)
         time.sleep(0.5)
     
-    if angle == 'x': #stopper servomotor ved "x" input
+    if ohminput == 'x': #stopper servomotor ved "x" input
         PWM.stop(servo_pin)
         PWM.cleanup()
         break
