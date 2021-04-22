@@ -5,7 +5,7 @@ import busio
 import adafruit_ina260
 import sys
 
-sys.path.append('../')
+sys.path.append('./MainCode/src/')
 import IPCHandler as IPC
 
 i2c = busio.I2C(board.SCL, board.SDA)
