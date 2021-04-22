@@ -6,7 +6,7 @@ import json
 
 import Timer as safetyTimer
 
-with open("../config.json") as json_data_file:
+with open("./MainCode/config.json") as json_data_file:
     config = json.load(json_data_file)
 
 timer = safetyTimer.Timer(600)  # 10 * 60 sec = 10 min
