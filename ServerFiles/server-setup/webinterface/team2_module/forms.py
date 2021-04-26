@@ -330,3 +330,12 @@ class PanelAngleForm(forms.Form):
             # 'topic',
             Submit('submit', 'vælg')
         )
+
+
+class GetValuesForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Submit('getValuesBtn', 'opdatér')
+        )
