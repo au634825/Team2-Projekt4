@@ -81,7 +81,7 @@ float lightSensor() {
 		else {
 			//Konverter dataen
 			//der opsættes en kalibreringsfaktor for at få ens data som med
-			float calib = 1;
+			float calib = 3.2;
 			float messureLUX = (data[1] * 256 + data[0]) / calib;
 			//printf("The lux value is -> %.2f lux \n", messure);
 			//syslog(LOG_NOTICE, "sensorValue %0.1f \n", messureLUX);
