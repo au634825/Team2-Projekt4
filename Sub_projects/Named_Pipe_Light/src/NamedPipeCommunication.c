@@ -31,7 +31,7 @@ int pipeListener(char *path, float (*function)(), char *sensorType,
 		memset(strGet, 0, sizeof strGet);
 		// First open in read only and read
 		fd = open(pathGet, O_RDONLY);
-		read(fd, strGet, 80);
+		read(fd, strGet, 80); // read
 
 		// If "GET"
 		if (strncmp("GET", strGet, 3) == 0) {
