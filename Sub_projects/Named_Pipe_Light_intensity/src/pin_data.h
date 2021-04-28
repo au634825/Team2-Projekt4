@@ -10,6 +10,7 @@
 
 
 ///PWM- rød led
+void pwm_mosfet_export();
 void pwm_mosfet_setup();
 void gpio_mosfet_fan_direction();
 
