@@ -39,6 +39,7 @@ sleep 1
 
 echo "Starting Light intensity controller.."
 config-pin P9_21 pwm &
+echo 1 > /sys/devices/platform/ocp/48300000.epwmss/48300200.pwm/pwm/pwmchip1/export &
 ./Sub_projects/Named_Pipe_Light_intensity/Named_Pipe_Light_intensity &
 LightIntensityPID=$!
 echo "LightIntensityPID pid: $LightIntensityPID"
