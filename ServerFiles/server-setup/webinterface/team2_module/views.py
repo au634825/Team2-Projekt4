@@ -141,7 +141,38 @@ def team2_main_page(request):
                 outcome = "Succes. Beskeden blev sendt."
             else:
                 outcome = "Fejl. Beskeden blev ikke."
-        return render(request, 'team2_module/home.html', {'output': output})
+
+        voltage = 1
+        current = 1
+        power = voltage * current
+        resistance = output.cleaned_data['resistance']
+        irradiance = 1
+        temperature = 1
+
+        time.sleep(4)
+
+        receiveStatus, returnData = receive_mqtt()
+        if receiveStatus:
+            print('beaglebone modtog data request')
+            voltage = returnData[0]
+            current = returnData[1]
+            power = returnData[2]
+            # resistance = returnData[3]
+            irradiance = returnData[4]
+            temperature = returnData[5]
+        else:
+            print('beaglebone modtog IKKE data request')
+
+        context = {'output': output,
+                   'voltage': voltage,
+                   'current': current,
+                   'power': power,
+                   'resistance': resistance,
+                   'irradiance': irradiance,
+                   'temperature': temperature,
+                   }
+
+        return render(request, 'team2_module/home.html', context)
     elif request.GET.get('updateBtn'):
         print("UpdateBtn pressed")
         voltage = 1
