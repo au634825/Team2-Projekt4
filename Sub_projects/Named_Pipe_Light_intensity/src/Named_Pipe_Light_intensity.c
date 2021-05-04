@@ -27,7 +27,7 @@ int main() {
 	int fd;
 	char strGet[80];
 	char *EHand;
-	const int sec = 30;
+	const int sec = 15;
 	//pwm_mosfet_export();
 	pwm_mosfet_setup();
 	gpio_mosfet_fan_direction();
