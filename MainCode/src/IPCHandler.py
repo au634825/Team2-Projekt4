@@ -48,7 +48,7 @@ def ipcRead(ipc_fifo_name):
                 msg = os.read(fifo, 15).decode("utf8")
             else:
                 # No data, do something else
-                msg = -1
+                msg = -2
         finally:
             poll.unregister(fifo)
     finally:

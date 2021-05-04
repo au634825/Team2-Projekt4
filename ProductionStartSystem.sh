@@ -2,6 +2,8 @@
 
 # Team2 Project 4 - start up script.
 
+cd /home/team2/Team2-Projekt4
+
 echo "Starting Receiver.."
 python3 /home/team2/Team2-Projekt4/MainCode/src/Receiver.py &
 ReceiverPID=$!

@@ -13,7 +13,7 @@
   },
   "defaultValues": {
     "brightness": "0",
-    "panelangel": "90",
+    "panelangel": "0",
     "resistance": "0"
   }
 }
