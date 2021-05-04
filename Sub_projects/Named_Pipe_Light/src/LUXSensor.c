@@ -80,14 +80,17 @@ float lightSensor() {
 
 		else {
 			//Konverter dataen
-			//der opsættes en kalibreringsfaktor for at få ens data som med
+			//der opsættes en kalibreringsfaktor for at få ens data som med !
 			float irradiance;
 			float calib = 3.2;
+			float scalingFactor = 1.449;
+
 			float messureLUX = (data[1] * 256 + data[0]) / calib;
+			float LUX = messureLUX * scalingFactor;
 
 			if(messureLUX > 300)
 			{
-				irradiance = 0.0109 * (messureLUX * 1.449) + 96.475;
+				irradiance = 0.0109 * LUX + 96.475;
 			}
 			else
 			{
