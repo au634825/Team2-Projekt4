@@ -1,5 +1,5 @@
 # Team2-Projekt4
-Dette er et repositorie omhandlende EH/EEH-PRO4, beskriver hvordan en solcelle teststand skal benyttes for at kunne udføre et fysik forsøg på Elektronik/Elektrisk Energiteknologi på 2. semester.  
+Dette er et repositorie omhandlende EH4/EEH4-PRO4, beskriver hvordan en solcelle teststand skal benyttes for at kunne udføre et fysik forsøg på Elektronik/Elektrisk Energiteknologi på 2. semester. Repositoriet inderholder alle program filer der skal til for at køre testanden.
 Nedenfor ses en guide til hvordan man indstiller teststanden fra serversiden. Derudover er der nogle forskellige dukumenter der kan anvendes i forbindelse med opgaven.
 
 * [Skabelon](https://github.com/au634825/Team2-Projekt4/blob/main/Fysik%20opgave/Fysik%20-%20%C3%B8velse%201%20-%20SKABALON.xlsx)
