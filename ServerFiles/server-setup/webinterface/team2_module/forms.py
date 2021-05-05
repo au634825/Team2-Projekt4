@@ -328,7 +328,7 @@ class PanelAngleForm(forms.Form):
             'brightness',
             'resistance',
             # 'topic',
-            Submit('submit', 'vælg')
+            Submit('submit', 'Opdatér data')
         )
 
 
