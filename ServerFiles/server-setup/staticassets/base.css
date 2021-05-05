@@ -181,11 +181,11 @@ footer {
 }
 
 #underlay {
-    background-color: rgba(100,100,100,0.5);
+    background-color: rgba(61, 61, 61, 0.7);
 }
 
 .underlay {
-    background-color: rgba(100,100,100,0.5);
+    background-color: rgba(61, 61, 61, 0.7);
     color: whitesmoke;
 }
 

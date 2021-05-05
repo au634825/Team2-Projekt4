@@ -7,7 +7,6 @@
     <div id="module_home">
 
         <div class="padding">
-
             <div class="module-text">
                 <div class="container-fluid" id="underlay">
                     <h1>Team2-Teststand</h1>
@@ -26,54 +25,75 @@
                         {% crispy output %}
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="padding">
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="container underlay">
-                        <h3>Data fra teststand:</h3>
-                        <div class="module-text">
-                            <table class="table table-dark">
-                                <tr>
-                                    <th>Spænding</th>
-                                    <th>Strøm</th>
-                                    <th>Effekt</th>
-                                    <th>modstand</th>
-                                    <th>Irradians</th>
-                                    <th>Temperatur</th>
-                                </tr>
-                                <tr>
-                                    <td>{{ voltage }} V</td>
-                                    <td>{{ current }} mA</td>
-                                    <td>{{ power }} mW</td>
-                                    <td>{{ resistance }} Ohm</td>
-                                    <td>{{ irradiance }} W/m²</td>
-                                    <td>{{ temperature }} &#176;</td>
-                                </tr>
-                            </table>
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="container underlay">
+                            <h3>Data fra teststand:</h3>
+                            <div class="module-text">
+                                <table class="table table-dark">
+                                    <tr>
+                                        <th>Spænding</th>
+                                        <th>Strøm</th>
+                                        <th>Effekt</th>
+                                        <th>modstand</th>
+                                        <th>Irradians</th>
+                                        <th>Temperatur</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ voltage }} V</td>
+                                        <td>{{ current }} mA</td>
+                                        <td>{{ power }} mW</td>
+                                        <td>{{ resistance }} Ohm</td>
+                                        <td>{{ irradiance }} W/m²</td>
+                                        <td>{{ temperature }} &#176;</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <hr>
+        <div class="container-fluid" id="underlay">
             <div class="module-text">
-                <div class="container-fluid" id="underlay">
-                    <h1>Brugervejledning</h1>
-                    <p>hej med dig</p>
-                </div>
+
+                <h1>Brugervejledning</h1>
+                <h4><b>Opretter navn</b></h4>
+                <p><font size="+1">Her bedes du indtaste dit navn eller jeres team navn/nummer.</font></p>
+                <h4><b>Solpanel vinkel</b></h4>
+                <p><font size="+1">Vinklen på solpanelet kan ændres til følgende værdier:
+                    [0°, 15°, 30°, 45°, 60°, 75°, 90°].
+                    Når vinklen står til 0° vil panelet stå vinkelret på lyskilden.
+                    På 90° vil den stå med siden til. Værdien vælges fra drop-down menuen.</font></p>
+                <h4><b>Lysstyrke</b></h4>
+                <p><font size="+1">Lysintensiteten kan ændres til følgende værdier:
+                    [0%, 25%, 50%, 75%, 100%]. Når lysstyrken er på 0% vil lyskilden være slukket.
+                    På 100% vil der være maks. Lysstyrke, 100% svarer til at lyskilden lyser med 100W.
+                    Værdien vælges fra drop-down menuen.</font></p>
+                <h4><b>Load modstand</b></h4>
+                <p><font size="+1">Modstandsværdien kan ændres fra 0Ω til maks. 924Ω.
+                    Modstandsværdien skal indtastes af brugeren som et positivt heltal.</font></p>
+                <h4><b>Knap ”opdater data”</b></h4>
+                <p><font size="+1">Når du har valgt solpanelets vinkel, lysstyrken og load modstanden skal du
+                    trykke på knappen ”opdater data” for at tage målingen. Når du trykker på knappen, vil
+                    lyskilden i teststanden tændes og sensorerne vil herefter måle de respektive værdier
+                    og sende dataene til serveren. Denne proces tager ca. 5 sec.
+                </font></p>
+                <h4><b>Data tabel</b></h4>
+                <p><font size="+1">Datatabellen udfyldes med data fra sensorer kort efter knappen ”opdater data”
+                    trykkes. Herefter skal du kopiere værdierne over i et værktøj til databehandling.
+                    Vi anbefaler værktøjet ”Excel”. For hver gang du ændrer på nogle af parametrene og trykker
+                    ”opdater data” vil dataene i tabellen erstattes af de nye.
+                    Husk derfor at gemme dem før du foretager næste måling.</font></p>
+                <h4>Mere information om teststanden kan findes på dette
+                    <a href="https://github.com/au634825/Team2-Projekt4">link</a>.</h4>
+
             </div>
         </div>
 
-      <div class="module-text">
-                <form action="#" method="get">
-                    <input type="submit"
-                           class="btn btn-primary"
-                           value="Opdatér"
-                           name="updateBtn">
-                </form>
-            </div>
     </div>
     <!-- managed via the css file -->
 
