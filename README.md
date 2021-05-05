@@ -1,7 +1,7 @@
 # Team2-Projekt4
 Nedenfor ses en guide til hvordan man indstiller teststanden fra serversiden
 
-[Skabelon](Fysik Opgaver/Fysik - øvelse 1 - SKABALON.xlsx)
+[Skabelon](Fysik Opgave/Fysik - øvelse 1 - SKABALON.xlsx)
 
 ### Opretter navn:
 Her bedes du indtaste dit navn eller jeres team navn/nummer.
