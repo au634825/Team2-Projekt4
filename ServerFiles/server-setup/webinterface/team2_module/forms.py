@@ -313,9 +313,9 @@ class PanelAngleForm(forms.Form):
         label='Lysstyrke',
         choices=LIGHT_LIST
     )
-    resistance = forms.CharField(
-        label="Load modstand",
-        widget=forms.TextInput(attrs={
+    resistance = forms.FloatField(
+        label="Load modstand (0-924)",
+        widget=forms.NumberInput(attrs={
             'loadValue': 'Heltal'})
     )
 

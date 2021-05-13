@@ -35,8 +35,13 @@ import io
 
 import json
 
+global returnData
+global receiving
+global sending
+
 
 def receive_mqtt():
+
     def on_message(client, userdata, message):
         print(message.topic + " " + str(message.payload))
         global returnData
@@ -48,17 +53,20 @@ def receive_mqtt():
 
     # Callback on publishing - After handshakes
     def on_publish(client, userdata, mid):
+        print("on_publish")
         global sending
         sending = False
 
     # Create client
-    receiver = MqttClient("Team2ModuleMessageSender", on_message, on_publish)
+    receiver = MqttClient("SeSe", on_message, on_publish)
     # Send and disconnect
     topic = "Testdevice/team2_module/REQUEST"
     send_me = "SEND_DATA"
-    rc = receiver.publish(topic, send_me)
+    print("Line 64")
     receiver.subscribe("Testdevice/team2_module/DATA")
+    rc = receiver.publish(topic, send_me)
     receiver.loop_start()
+    print("Line 67")
     global sending
     sending = True
     # Wait for the handshaking to end
@@ -68,11 +76,14 @@ def receive_mqtt():
     global receiving
     receiving = True
     # Wait for the handshaking to end
+    print("Line 78")
     while receiving:
+        print("rec")
         time.sleep(0.1)
         pass
     receiver.loop_stop()
     receiver.disconnect()
+    print("Line 84 Disconnect")
 
     return rc, returnData
 
@@ -111,7 +122,7 @@ def transmit_mqtt(form_obj):
         sending = False
 
     # Create client
-    publisher = MqttClient("Team2oduleMessageSender", donothing, on_publish_callback)
+    publisher = MqttClient("Team2ModuleMessageSender", donothing, on_publish_callback)
 
     # Send and disconnect
     rc = publisher.publish(topic, send_me)
@@ -146,20 +157,24 @@ def team2_main_page(request):
         current = 1
         power = voltage * current
         resistance = output.cleaned_data['resistance']
+        if resistance < 0:
+            resistance = 0
+        elif resistance > 924:
+            resistance = 924
         irradiance = 1
         temperature = 1
 
-        time.sleep(4)
+        time.sleep(2)
 
-        receiveStatus, returnData = receive_mqtt()
+        receiveStatus, returnDataBB = receive_mqtt()
         if receiveStatus:
             print('beaglebone modtog data request')
-            voltage = returnData[0]
-            current = returnData[1]
-            power = returnData[2]
-            # resistance = returnData[3]
-            irradiance = returnData[4]
-            temperature = returnData[5]
+            voltage = returnDataBB[0]
+            current = returnDataBB[1]
+            power = returnDataBB[2]
+            # resistance = returnDataBB[3]
+            irradiance = returnDataBB[4]
+            temperature = returnDataBB[5]
         else:
             print('beaglebone modtog IKKE data request')
 

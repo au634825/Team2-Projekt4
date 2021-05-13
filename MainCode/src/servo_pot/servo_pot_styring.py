@@ -42,11 +42,6 @@ while True:
         PWM.set_duty_cycle(servo_pin, duty_scale_const)
         time.sleep(0.5)
 
-    if ohminput == 'x':  # stopper servomotor ved "x" input
-        PWM.stop(servo_pin)
-        PWM.cleanup()
-        break
-
     angle_f = float(angle2)
     # konverter fra ohm til vinkel
     duty = 100 - ((angle_f / 270) * duty_span + duty_min)

@@ -14,7 +14,9 @@ from django.conf import settings
 class MqttClient():
     # These should be gotten from the environment or, ideally, from the Django settings file
     # broker_address = settings.MQTT["internal"]["HOST"]
-    broker_address = "broker.emqx.io"
+    # broker_address = "broker.emqx.io"
+
+    broker_address = "test.mosquitto.org"
     # broker_port = settings.MQTT["internal"]["PORT"]
     broker_port = 1883
     username = settings.MQTT["internal"]["USER"]

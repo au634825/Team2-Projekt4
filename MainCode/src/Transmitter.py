@@ -104,7 +104,8 @@ client.on_publish = on_publish
 client.username_pw_set(username="team2", password="team2")
 
 # client.connect("localhost", 8000, 60)
-client.connect("broker.emqx.io", 1883, 60)
+# client.connect("broker.emqx.io", 1883, 60)
+client.connect("test.mosquitto.org", 1883, 60)
 try:
     client.loop_forever()
     Connected = False
