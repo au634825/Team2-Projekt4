@@ -58,14 +58,14 @@ def receive_mqtt():
         sending = False
 
     # Create client
-    receiver = MqttClient("SeSe", on_message, on_publish)
+    receiver = MqttClient("Team2ModuleMessageSender", on_message, on_publish)
     # Send and disconnect
     topic = "Testdevice/team2_module/REQUEST"
     send_me = "SEND_DATA"
     print("Line 64")
     receiver.subscribe("Testdevice/team2_module/DATA")
-    rc = receiver.publish(topic, send_me)
     receiver.loop_start()
+    rc = receiver.publish(topic, send_me)
     print("Line 67")
     global sending
     sending = True
