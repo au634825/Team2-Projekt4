@@ -75,6 +75,7 @@ def getSensorValuesOr():
 
     IPC.ipcSend(config['pipes']['current'], "GET")
     current = IPC.ipcRead(config['pipes']['current'])
+    current = abs(current)
     print("Got current: " + str(current))
 
     IPC.ipcSend(config['pipes']['power'], "GET")
