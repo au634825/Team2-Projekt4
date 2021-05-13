@@ -28,11 +28,11 @@ client.on_connect = on_connect
 client.username_pw_set(username="team2", password="team2")
 client.connect("localhost", 8000, 60)
 print("Connecting...")
-#client.connect("broker.hivemq.com", 1883, 60)
+#client.connect("test.mosquitto.org", 1883, 60)
 client.loop_start()
 global Connected
 Connected = False
 while not Connected:  # Wait for connection
     time.sleep(0.1)
-ret = client.publish("Testdevice/team2_module/panelangle", "publishing")
+ret = client.publish("Testdevice/team2_module/DATA", "test-publishing")
 time.sleep(3)

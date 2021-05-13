@@ -103,6 +103,7 @@ client.on_message = on_message
 client.on_publish = on_publish
 client.username_pw_set(username="team2", password="team2")
 
+print(SensorValues())
 # client.connect("localhost", 8000, 60)
 # client.connect("broker.emqx.io", 1883, 60)
 client.connect("test.mosquitto.org", 1883, 60)
